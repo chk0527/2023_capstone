@@ -28,7 +28,7 @@ const Videotest2 = ({route}) => {
         height={300}
         play={playing}
         
-        videoId={oqv4DD0kIb8} 
+        videoId={route.params.id2} 
         
       />
       <Button title={playing ? "pause" : "play"} onPress={togglePlaying} />
