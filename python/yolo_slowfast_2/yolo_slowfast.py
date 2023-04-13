@@ -156,7 +156,7 @@ def main(config):
         save_yolopreds_tovideo(yolo_preds,id_to_ava_labels,coco_color_map,outputvideo,i, yt.title,url)
     global df
     df = df.drop_duplicates()
-    df.to_json("./example.json", orient = 'records')
+    df.to_json("./%s.json"%(yt.title), orient = 'records')
     print("total cost: {:.3f}s, video clips length: {}s".format(time.time()-a,video.duration))
        
     outputvideo.release()
