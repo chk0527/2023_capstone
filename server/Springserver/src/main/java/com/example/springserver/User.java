@@ -3,7 +3,7 @@ package com.example.springserver;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "video2")
+@Table(name = "comvideo")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -26,4 +26,16 @@ public class UserService {
     public List<User> getAllData() {
         return userRepository.findAllData();
     }
+
+    public List<User> getVideo1() {
+        return userRepository.findVideo1();
+    }
+
+    public List<User> getVideo2() {
+        return userRepository.findVideo2();
+    }
+
+    public List<User> getVideo3() {
+        return userRepository.findVideo2();
+    }
 }
