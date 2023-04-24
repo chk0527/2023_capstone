@@ -40,5 +40,19 @@ public class Controller {
         return userRepository.findAllData();
     }
 
+    @GetMapping("/video1")
+    public List<User> getData4() {
+        return userRepository.findVideo1();
+    }
+
+    @GetMapping("/video2")
+    public List<User> getData5() {
+        return userRepository.findVideo2();
+    }
+
+    @GetMapping("/video3")
+    public List<User> getData6() {
+        return userRepository.findVideo3();
+    }
 
 }
