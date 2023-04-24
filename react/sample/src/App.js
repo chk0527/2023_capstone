@@ -12,27 +12,30 @@ import HomeScreen from "./components/HomeScreen";
 import SearchScreen from "./components/SearchScreen";
 
 import Videotest2 from "./components/Videotest2";
+import Videotest3 from "./components/Videotest3";
 import Tabs from "./components/Navigation/Tabs";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+
 
 const Stack=createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 function HomeStack(){
     return(
-        <Stack.Navigator initialRouteName="Home" 
+        <Stack.Navigator initialRouteName="Home"
         screenOptions={{
            headerStyle: {
-             backgroundColor: '#000000',
+             backgroundColor: '#ffffff',
            },
            headerTintColor: '#FF2D00',
            headerTitleStyle: {
              fontWeight: 'bold',
            },
          }}>
-           <Stack.Screen name="Home" component={Sqltest}/>
+           <Stack.Screen name="Main" component={Sqltest}/>
            <Stack.Screen name="Detail" component={Videotest}/>
            <Stack.Screen name="Detail2" component={Videotest2}/>
+           <Stack.Screen name="Detail3" component={Videotest3}/>
        </Stack.Navigator>
     )
 }
@@ -40,11 +43,11 @@ function HomeStack(){
 const App = () =>{
     return (
         <NavigationContainer >
-            <Tab.Navigator>
-                <Tab.Screen name ="Home" component={HomeStack}/>
-            <Tab.Screen name="HomeScreen" component={HomeScreen}/>
-            <Tab.Screen name="SearchScreen" component={SearchScreen}/>
-            <Tab.Screen name="CategoriesScreen" component={CategoriesScreen}/>
+            <Tab.Navigator>  
+            <Tab.Screen name ="HanFlix" component={HomeStack} />
+            <Tab.Screen name="Search" component={HomeScreen}/>
+            <Tab.Screen name="Categories" component={SearchScreen}/>
+            <Tab.Screen name="Options" component={CategoriesScreen}/>
              </Tab.Navigator>
        
         </NavigationContainer>
@@ -65,6 +68,7 @@ const styles = StyleSheet.create({
       fontSize: 15,
       fontWeight: 'bold',
     },
+    
   });
 
 export default App;

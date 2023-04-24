@@ -5,7 +5,7 @@ import axios from 'axios';
 import { Table, TableWrapper, Row, Col,Cell } from "react-native-table-component";
 
 
-const Videotest = ({route}) => {
+const Videotest3 = ({route}) => {
   const [playing, setPlaying] = useState(false);
   const [dataList, setDataList] = useState([]);
 
@@ -15,7 +15,7 @@ const Videotest = ({route}) => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/video1');
+      const response = await axios.get('http://localhost:8080/video3');
       setDataList(response.data);
     } catch (error) {
       console.log(error);
@@ -49,7 +49,7 @@ const Videotest = ({route}) => {
       <YoutubePlayer
         height={300}
         play={playing}
-        videoId={route.params.id1} //jgYC0r_lGRQ
+        videoId={route.params.id3} //jgYC0r_lGRQ
         onChangeState={onStateChange}
         ref={playerRef}
       />
@@ -124,4 +124,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Videotest;
+export default Videotest3;
