@@ -14,7 +14,7 @@ from pytorchvideo.models.hub import slowfast_r50_detection
 from deep_sort.deep_sort import DeepSort
 
 from pytube import YouTube
-from pytube.cli import on_progress
+
 
 def tensor_to_numpy(tensor):
     img = tensor.cpu().numpy().transpose((1, 2, 0))
@@ -104,13 +104,13 @@ def main(config):
     path = r"./outvideo/change"
     url = input("Path to video (or URL): ")
 
-    #yt.streams.first().download(output_path="path_to_dir", filename="filename")
-    yt = YouTube(url, on_progress_callback=on_progress)
+    yt = YouTube(url)
     stream = yt.streams.get_highest_resolution()
     stream.download(DOWNLOAD_FOLDER, filename="new.mp4")
-    
+
+
     new_path = path.replace("change", "new.mp4")
-    
+   
     video=cv2.VideoCapture(new_path)
     width,height = int(video.get(3)),int(video.get(4))
     video.release()
@@ -181,7 +181,3 @@ if __name__=="__main__":
 ##########https://youtu.be/KRgj2SORTko
 ##########https://youtu.be/9ucrzKI8-W
 ##########https://youtu.be/_SYFkhPq5A8
-
-
-
-#https://youtu.be/Q_SJBwA2hIY
