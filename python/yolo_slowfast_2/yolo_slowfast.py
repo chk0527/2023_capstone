@@ -141,25 +141,25 @@ def main(config):
             deepsort_outputs.append(temp.astype(np.float32))
         yolo_preds.pred=deepsort_outputs
         id_to_ava_labels={}
-        if yolo_preds.pred[img_num//2].shape[0]:
-            inputs,inp_boxes,_=ava_inference_transform(video_clips,yolo_preds.pred[img_num//2][:,0:4],crop_size=imsize)
-            inp_boxes = torch.cat([torch.zeros(inp_boxes.shape[0],1), inp_boxes], dim=1)
-            if isinstance(inputs, list):
-                inputs = [inp.unsqueeze(0).to(device) for inp in inputs]
-            else:
-                inputs = inputs.unsqueeze(0).to(device)
-            with torch.no_grad():
-                slowfaster_preds = video_model(inputs, inp_boxes.to(device))
-                slowfaster_preds = slowfaster_preds.cpu()
-            for tid,avalabel in zip(yolo_preds.pred[img_num//2][:,5].tolist(),np.argmax(slowfaster_preds,axis=1).tolist()):
-                id_to_ava_labels[tid]=ava_labelnames[avalabel+1]
+        # if yolo_preds.pred[img_num//2].shape[0]:
+        #     inputs,inp_boxes,_=ava_inference_transform(video_clips,yolo_preds.pred[img_num//2][:,0:4],crop_size=imsize)
+        #     inp_boxes = torch.cat([torch.zeros(inp_boxes.shape[0],1), inp_boxes], dim=1)
+        #     if isinstance(inputs, list):
+        #         inputs = [inp.unsqueeze(0).to(device) for inp in inputs]
+        #     else:
+        #         inputs = inputs.unsqueeze(0).to(device)
+        #     with torch.no_grad():
+        #         slowfaster_preds = video_model(inputs, inp_boxes.to(device))
+        #         slowfaster_preds = slowfaster_preds.cpu()
+        #     for tid,avalabel in zip(yolo_preds.pred[img_num//2][:,5].tolist(),np.argmax(slowfaster_preds,axis=1).tolist()):
+        #         id_to_ava_labels[tid]=ava_labelnames[avalabel+1]
         save_yolopreds_tovideo(yolo_preds,id_to_ava_labels,coco_color_map,outputvideo,i, yt.title,url)
     global df
     df = df.drop_duplicates()
     df.to_json("./%s.json"%(yt.title), orient = 'records')
     print("total cost: {:.3f}s, video clips length: {}s".format(time.time()-a,video.duration))
        
-    outputvideo.release()
+    #outputvideo.release()
     print('saved video to:', vide_save_path)
    
 df = pd.DataFrame(columns={"name","object","timestamp","ava_label","link"})
@@ -181,3 +181,5 @@ if __name__=="__main__":
 ##########https://youtu.be/KRgj2SORTko
 ##########https://youtu.be/9ucrzKI8-W
 ##########https://youtu.be/_SYFkhPq5A8
+
+#https://youtu.be/HsoGXN8euso
