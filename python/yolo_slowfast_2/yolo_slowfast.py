@@ -156,7 +156,7 @@ def main(config):
         save_yolopreds_tovideo(yolo_preds,id_to_ava_labels,coco_color_map,outputvideo,i, yt.title,url)
     global df
     df = df.drop_duplicates()
-    df.to_json("./%s.json"%(yt.title), orient = 'records')
+    df.to_json("./noMoreTomorrow.json", orient = 'records')
     print("total cost: {:.3f}s, video clips length: {}s".format(time.time()-a,video.duration))
        
     #outputvideo.release()
@@ -182,4 +182,5 @@ if __name__=="__main__":
 ##########https://youtu.be/9ucrzKI8-W
 ##########https://youtu.be/_SYFkhPq5A8
 
-#https://youtu.be/HsoGXN8euso
+#테스트 https://youtu.be/HsoGXN8euso
+#무료영화 우리에게 내일은 없다 https://youtu.be/OeH0zDG9Lhg
