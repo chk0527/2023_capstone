@@ -8,7 +8,7 @@ import { Table, TableWrapper, Row, Col,Cell } from "react-native-table-component
 const Videotest = ({route}) => {
   const [playing, setPlaying] = useState(false);
   const [dataList, setDataList] = useState([]);
-
+  
   useEffect(() => {
     fetchData();
   }, []);

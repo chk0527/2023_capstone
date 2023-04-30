@@ -3,7 +3,6 @@ import { View, Text, StatusBar, StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import Videotest from "./components/Videotest";
 import Texttest from "./components/Texttest";
 import Sqltest from "./components/Sqltest";
 
@@ -11,6 +10,7 @@ import CategoriesScreen from "./components/CategoriesScreen";
 import HomeScreen from "./components/HomeScreen";
 import SearchScreen from "./components/SearchScreen";
 
+import Videotest from "./components/Videotest";
 import Videotest2 from "./components/Videotest2";
 import Videotest3 from "./components/Videotest3";
 import Tabs from "./components/Navigation/Tabs";
