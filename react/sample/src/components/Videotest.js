@@ -85,18 +85,17 @@ const Videotest = ({route}) => {
         value={query}
         onChange={(event) => updateSearch(event.nativeEvent.text)}
       />
-      <Table borderStyle={{borderWidth: 1, borderColor: 'white'}}>
-        {renderHeader()}
-        <ScrollView>
+      <ScrollView>
+        <Table borderStyle={{borderWidth: 1, borderColor: 'white'}}>
+          {renderHeader()}
           {search.map((rowData, index) => (
             <React.Fragment key={index}>{renderRow(rowData)}</React.Fragment>
           ))}
-        </ScrollView>
-      </Table>
+        </Table>
+      </ScrollView>
     </View>
   );
 };
-
 
 const styles = StyleSheet.create({
   main:{
