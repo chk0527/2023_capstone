@@ -104,12 +104,12 @@ def main(config):
     path = r"./outvideo/change"
     url = input("Path to video (or URL): ")
 
-    yt = YouTube(url)
+    yt = YouTube(url, use_oauth=True, allow_oauth_cache=True)
     stream = yt.streams.get_highest_resolution()
-    stream.download(DOWNLOAD_FOLDER)
+    stream.download(DOWNLOAD_FOLDER, filename="new.mp4")
 
 
-    new_path = path.replace("change", yt.title+".mp4")
+    new_path = path.replace("change", "new.mp4")
    
     video=cv2.VideoCapture(new_path)
     width,height = int(video.get(3)),int(video.get(4))
@@ -156,10 +156,10 @@ def main(config):
         save_yolopreds_tovideo(yolo_preds,id_to_ava_labels,coco_color_map,outputvideo,i, yt.title,url)
     global df
     df = df.drop_duplicates()
-    df.to_json("./%s.json"%(yt.title), orient = 'records')
+    df.to_json("./noMoreTomorrow.json", orient = 'records')
     print("total cost: {:.3f}s, video clips length: {}s".format(time.time()-a,video.duration))
        
-    outputvideo.release()
+    #outputvideo.release()
     print('saved video to:', vide_save_path)
    
 df = pd.DataFrame(columns={"name","object","timestamp","ava_label","link"})
@@ -181,3 +181,6 @@ if __name__=="__main__":
 ##########https://youtu.be/KRgj2SORTko
 ##########https://youtu.be/9ucrzKI8-W
 ##########https://youtu.be/_SYFkhPq5A8
+
+#테스트 https://youtu.be/HsoGXN8euso
+#무료영화 우리에게 내일은 없다 https://youtu.be/OeH0zDG9Lhg

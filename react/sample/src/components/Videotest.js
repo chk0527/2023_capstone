@@ -3,11 +3,12 @@ import { Button, View, Alert, Text, StyleSheet, ScrollView } from "react-native"
 import YoutubePlayer from "react-native-youtube-iframe";
 import axios from 'axios';
 import { Table, TableWrapper, Row, Col,Cell } from "react-native-table-component";
-
+import { SearchBar } from '@rneui/themed';
 
 const Videotest = ({route}) => {
   const [playing, setPlaying] = useState(false);
   const [dataList, setDataList] = useState([]);
+  const [query, setQuery] = useState('');
 
   useEffect(() => {
     fetchData();
@@ -15,11 +16,20 @@ const Videotest = ({route}) => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/video1');
+      const response = await axios.get(`http://localhost:8080/video1`);
       setDataList(response.data);
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const [search, setSearch] = useState(dataList);
+  const updateSearch = (text) => {
+    const filtered = dataList.filter((item) =>
+      item.object.toLowerCase().includes(text.toLowerCase())
+    );
+    setQuery(text);
+    setSearch(text === '' ? dataList : filtered);
   };
 
   const onStateChange = useCallback((state) => {
@@ -37,48 +47,55 @@ const Videotest = ({route}) => {
     playerRef.current?.seekTo(time, true);
   }, []);
 
-  const tableHead = ['ID', 'Name', 'Timestamp', 'Object', 'Action'];
-  const flexArr = [0.3,3,1,1,1];
+  const flexArr = [0.5,3,1,1,1];
 
-  const tableData = dataList.map(item => [item.id, item.name, item.timestamp, item.object, item.ava_label]);
+  const renderHeader = () =>(
+    <Row
+      data={['ID', 'Name', 'Time stamp', 'Object', 'Action']}
+      style={styles.head}
+      textStyle={styles.text}
+      flexArr={flexArr}
+    />
+  );
+
+  const renderRow = (rowData) => (
+    <Row
+      data={[rowData.id.toString(), rowData.name, rowData.timestamp, rowData.object.toString(), rowData.ava_label]}
+      style={styles.cell} 
+      textStyle={styles.text}
+      flexArr={flexArr}
+      borderColor='white'
+      onPress={() => seekTo(rowData.timestamp)}
+    />
+  );
 
   const playerRef = useRef(null);
-
+  
   return (    
     <View style={styles.main}>
       <YoutubePlayer
-        height={300}
+        height={222}
         play={playing}
         videoId={route.params.id1} //jgYC0r_lGRQ
         onChangeState={onStateChange}
         ref={playerRef}
       />
-      <Button title={playing ? "pause" : "play"} onPress={togglePlaying} />
+      <SearchBar
+        placeholder="Search"
+        value={query}
+        onChange={(event) => updateSearch(event.nativeEvent.text)}
+      />
       <ScrollView>
-      <Table borderStyle={{borderWidth: 1, borderColor: '#ffffff'}}>
-        <Row data={tableHead} style={styles.head} textStyle={styles.text} flexArr={flexArr}/>
-        {
-         tableData.map((rowData, index) => (
-          <TableWrapper key={index} style={styles.row}>
-          <Cell key={0} data={rowData[0]} style={styles.cell_id} textStyle={styles.text} />
-          <Cell key={1} data={rowData[1]} style={styles.cell_name} textStyle={styles.text} />
-          <Cell 
-            key={2} 
-            data={<Text style={styles.link} onPress={() => seekTo(rowData[2])}>{rowData[2]}</Text>}
-            style={styles.cell} 
-            textStyle={styles.text} 
-          />
-          <Cell key={3} data={rowData[3]} style={styles.cell} textStyle={styles.text} />
-          <Cell key={4} data={rowData[4]} style={styles.cell} textStyle={styles.text} />
-          </TableWrapper>
-          ))    
-        }
-      </Table>
+        <Table borderStyle={{borderWidth: 1, borderColor: 'white'}}>
+          {renderHeader()}
+          {search.map((rowData, index) => (
+            <React.Fragment key={index}>{renderRow(rowData)}</React.Fragment>
+          ))}
+        </Table>
       </ScrollView>
     </View>
   );
 };
-
 
 const styles = StyleSheet.create({
   main:{
@@ -87,8 +104,9 @@ const styles = StyleSheet.create({
   },
   head: {
     height: 50,
-    backgroundColor: '#333333'
-    
+    backgroundColor: '#333333',
+    borderBottomColor : 'white',
+    borderBottomWidth: 1,
   },
   row: {
     flexDirection: 'row',
@@ -96,7 +114,7 @@ const styles = StyleSheet.create({
     height: 50
   },
   text: {
-    color:'#ffffff',
+    color:'white',
     fontSize: 15,
     fontWeight: 'bold',
     textAlign: 'center'
@@ -104,7 +122,7 @@ const styles = StyleSheet.create({
    cell: {
     flex: 1,
     borderWidth: 0.5,
-    borderColor: '#c8e1ff',
+    borderColor: 'white',
   },
   cell_id: {
     flex: 0.3,
