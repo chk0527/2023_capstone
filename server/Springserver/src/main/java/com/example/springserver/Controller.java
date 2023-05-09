@@ -22,8 +22,13 @@ public class Controller {
 
     @Autowired
     final UserService userService;
-
     final UserRepository userRepository;
+
+    @Autowired
+    final VideoService videoService;
+    final VideoRepository videoRepository;
+
+
 
     @GetMapping("/data")
     public List<Integer> getData() {
@@ -34,6 +39,9 @@ public class Controller {
     public List<User> getData2() {
         return userRepository.findByNameAndObject();
     }
+
+    @GetMapping("/video_info")
+    public List<VideoInfo> getVideoData() { return videoRepository.findVideoInfoData(); }
 
     @GetMapping("/alldata")
     public List<User> getData3() {

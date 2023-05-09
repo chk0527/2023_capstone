@@ -8,6 +8,7 @@ import { Table, TableWrapper, Row, Col,Cell } from "react-native-table-component
 const Videotest = ({route}) => {
   const [playing, setPlaying] = useState(false);
   const [dataList, setDataList] = useState([]);
+
   
   useEffect(() => {
     fetchData();
@@ -37,8 +38,28 @@ const Videotest = ({route}) => {
     playerRef.current?.seekTo(time, true);
   }, []);
 
+  const flexArr = [0.5,3,1,1,1];
+
+  const renderHeader = () =>(
+    <Row
+      data={['ID', 'Name', 'Time stamp', 'Object', 'Action']}
+      style={styles.head}
+      textStyle={styles.text}
+      flexArr={flexArr}
+    />
+  );
+
+  const renderRow = (rowData) => (
+    <Row
+      data={[rowData.id.toString(), rowData.name, rowData.timestamp, rowData.object.toString(), rowData.ava_label]}
+      style={styles.cell} 
+      textStyle={styles.text}
+      flexArr={flexArr}
+      borderColor='white'
+    />
+  );
+
   const tableHead = ['ID', 'Name', 'Timestamp', 'Object', 'Action'];
-  const flexArr = [0.3,3,1,1,1];
 
   const tableData = dataList.map((item, index) => [index+1, item.name, item.timestamp, item.object, item.ava_label]);
 

@@ -2,15 +2,16 @@ import { Button, View, Alert, Text, StyleSheet, ScrollView } from "react-native"
 import React, { useState, useCallback, useRef, useEffect } from "react";
 import axios from 'axios';
 import { Table, TableWrapper, Row, Col,Cell } from "react-native-table-component";
-
-
 import Videotest from "./Videotest";
 import Videotest2 from "./Videotest2";
 import Videotest3 from "./Videotest3";
-import { SearchBar } from "react-native-screens";
+import { SearchBar } from '@rneui/themed';
 
 const HomeScreen = ({route, navigation}) => {
   const [dataList, setDataList] = useState([]);
+  const [query, setQuery] = useState(''); // 검색창 쿼리문 
+  const [search, setSearch] = useState(dataList); // 검색창 입력된 정보
+
   const cancelSource = axios.CancelToken.source();
   useEffect(() => {
     fetchData();
@@ -18,42 +19,63 @@ const HomeScreen = ({route, navigation}) => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/alldata');
+      const response = await axios.get(`http://localhost:8080/video_info`);
       setDataList(response.data);
+      setSearch(response.data);
+      const uniqueObjects = Array.from(new Set(response.data.map(item => item.object)));
+      setObjects(uniqueObjects);
+      const uniqueActions = Array.from(new Set(response.data.map(item => item.ava_label)));
+      setActions(uniqueActions);
     } catch (error) {
       console.log(error);
     }
   };
 
-  const tableHead = ['ID', 'VideoName', 'Time stamp', 'Object', 'Action'];
-  const flexArr = [0.5,3,1,1,1];
+  const updateSearch = (text) => {
+    const filtered = dataList.filter((item) =>
+      item.name.toLowerCase().includes(text.toLowerCase()) // 영상제목 검색
+    );
+    setQuery(text);
+    setSearch(text === '' ? dataList : filtered);
+  };
 
-  const tableData = dataList.map(item => [item.id, item.name, item.timestamp, item.object, item.ava_label]);
+  const flexArr = [1,1];
 
+  const renderHeader = () =>(
+    <Row
+      data={['Title', 'Description']}
+      style={styles.head}
+      textStyle={styles.text}
+      flexArr={flexArr}
+    />
+  );
+
+  const renderRow = (rowData) => (
+    <Row
+      data={[rowData.title, rowData.description]}
+      style={styles.cell} 
+      textStyle={styles.text}
+      flexArr={flexArr}
+      borderColor='white'
+      onPress={() => navigation.navigate("Detail")} // 여기서 화면전환 시켜야할거 같은데 잘 안됨
+    />
+  );
 
   return (
     <View style={styles.main}>
-      <SearchBar><Text style={styles.search}>검색기능</Text></SearchBar>
+      <SearchBar
+        placeholder="Search"
+        value={query}
+        onChange={(event) => updateSearch(event.nativeEvent.text)}
+      />
       <ScrollView>
-      <Table borderStyle={{borderWidth: 1, borderColor: '#ffffff'}}>
-        <Row data={tableHead} style={styles.head} textStyle={styles.text} flexArr={flexArr}/>
-        {
-         tableData.map((rowData, index) => (
-          <TableWrapper key={index} style={styles.row}>
-          <Cell key={0} data={rowData[0]} style={styles.cell_id} textStyle={styles.text} />
-          <Cell key={1} 
-            data={<Text style={styles.link} onPress={() => navigation.navigate("Detail")}>{rowData[1]}</Text>}
-            style={styles.cell_name} 
-            textStyle={styles.text} 
-            />
-          <Cell key={2} data={rowData[2]}style={styles.cell} textStyle={styles.text} />
-          <Cell key={3} data={rowData[3]} style={styles.cell} textStyle={styles.text} />
-          <Cell key={4} data={rowData[4]} style={styles.cell} textStyle={styles.text} />
-          </TableWrapper>
-          ))    
-        }
+        <Table borderStyle={{borderWidth: 1, borderColor: "white" }}>
+        {renderHeader()}
+        {search.map((rowData, index) => (
+          <React.Fragment key={index}>{renderRow(rowData)}</React.Fragment>
+        ))}
       </Table>
-      </ScrollView>
+    </ScrollView>
     </View>
   )
 }

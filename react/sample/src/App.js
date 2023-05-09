@@ -51,7 +51,7 @@ const App = () =>{
                 tabBarActiveTintColor: '#fff'}}
                 >  
             <Tab.Screen name ="HanFlix" component={HomeStack}/>
-            <Tab.Screen name="HanFlix2" component={HomeScreen}/>
+            <Tab.Screen name="Search" component={HomeScreen}/>
             <Tab.Screen name="Categories" component={SearchScreen}/>
             <Tab.Screen name="Options" component={CategoriesScreen}/>
              </Tab.Navigator>
