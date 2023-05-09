@@ -8,14 +8,14 @@ import { Table, TableWrapper, Row, Col,Cell } from "react-native-table-component
 const Videotest = ({route}) => {
   const [playing, setPlaying] = useState(false);
   const [dataList, setDataList] = useState([]);
-
+  
   useEffect(() => {
     fetchData();
   }, []);
 
   const fetchData = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/video2');
+      const response = await axios.get('http://localhost:8080/video2?_sort=id');
       setDataList(response.data);
     } catch (error) {
       console.log(error);
@@ -40,7 +40,8 @@ const Videotest = ({route}) => {
   const tableHead = ['ID', 'Name', 'Timestamp', 'Object', 'Action'];
   const flexArr = [0.3,3,1,1,1];
 
-  const tableData = dataList.map(item => [item.id, item.name, item.timestamp, item.object, item.ava_label]);
+  const tableData = dataList.map((item, index) => [index+1, item.name, item.timestamp, item.object, item.ava_label]);
+
 
   const playerRef = useRef(null);
 
