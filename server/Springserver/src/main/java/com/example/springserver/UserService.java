@@ -38,4 +38,8 @@ public class UserService {
     public List<User> getVideo3() {
         return userRepository.findVideo2();
     }
+
+    public List<User> getVideo4() {
+        return userRepository.findVideo3();
+    }
 }

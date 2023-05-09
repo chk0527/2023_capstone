@@ -54,5 +54,10 @@ public class Controller {
     public List<User> getData6() {
         return userRepository.findVideo3();
     }
+
+    @GetMapping("/video4")
+    public List<User> getData7() {
+        return userRepository.findVideo3();
+    }
 //committest
 }
