@@ -15,7 +15,8 @@ const Videotest3 = ({route}) => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/video3'); // local호스트가 아닌 서버를 실행할 pc의 ip주소
+      
+      const response = await axios.get('http://localhost:8080/video3?_sort=id'); // local호스트가 아닌 서버를 실행할 pc의 ip주소
       setDataList(response.data);
     } catch (error) {
       console.log(error);
@@ -40,7 +41,8 @@ const Videotest3 = ({route}) => {
   const tableHead = ['ID', 'Name', 'Timestamp', 'Object', 'Action'];
   const flexArr = [0.3,3,1,1,1];
 
-  const tableData = dataList.map(item => [item.id, item.name, item.timestamp, item.object, item.ava_label]);
+  const tableData = dataList.map((item, index) => [index+1, item.name, item.timestamp, item.object, item.ava_label]);
+
 
   const playerRef = useRef(null);
 

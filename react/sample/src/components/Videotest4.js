@@ -11,8 +11,8 @@ const Videotest = ({route}) => {
   const [query, setQuery] = useState(''); // 검색창 쿼리문 
   const [search, setSearch] = useState(dataList); // 검색창 입력된 정보
   //const [modalVisible, setModalVisible] = useState(false);
-  const [objects, setObjects] = useState([]); // 
-  const [actions, setActions] = useState([]); // 
+  const [objects, setObjects] = useState([]); // 전체 리스트 표시를 위한 DB에서 받아온 물체 분류
+  const [actions, setActions] = useState([]); // 전체 리스트 표시를 위한 DB에서 받아온 행동 분류
 
   useEffect(() => {
     fetchData();
@@ -20,7 +20,7 @@ const Videotest = ({route}) => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(`http://localhost:8080/video1`);
+      const response = await axios.get(`http://localhost:8080/video4`);
       setDataList(response.data);
       setSearch(response.data);
       const uniqueObjects = Array.from(new Set(response.data.map(item => item.object)));
@@ -67,9 +67,9 @@ const Videotest = ({route}) => {
     />
   );
 
-  const renderRow = (rowData) => (
+  const renderRow = (rowData, index) => (
     <Row
-      data={[rowData.id.toString(), rowData.name, rowData.timestamp, rowData.object.toString(), rowData.ava_label]}
+      data={[index+1, rowData.name, rowData.timestamp, rowData.object.toString(), rowData.ava_label]}
       style={styles.cell} 
       textStyle={styles.text}
       flexArr={flexArr}
@@ -77,6 +77,7 @@ const Videotest = ({route}) => {
       onPress={() => seekTo(rowData.timestamp)}
     />
   );
+  
 
   const playerRef = useRef(null);
 
@@ -105,7 +106,7 @@ const Videotest = ({route}) => {
       <YoutubePlayer
         height={222}
         play={playing}
-        videoId={route.params.id1} //jgYC0r_lGRQ
+        videoId={route.params.id4} // 메인화면에서 넘겨주는 영상 id
         onChangeState={onStateChange}
         ref={playerRef}
       />
@@ -133,8 +134,8 @@ const Videotest = ({route}) => {
         <Table borderStyle={{borderWidth: 1, borderColor: "white" }}>
         {renderHeader()}
         {search.map((rowData, index) => (
-          <React.Fragment key={index}>{renderRow(rowData)}</React.Fragment>
-        ))}
+        <React.Fragment key={index}>{renderRow(rowData, index)}</React.Fragment>
+      ))}
       </Table>
     </ScrollView>
    
