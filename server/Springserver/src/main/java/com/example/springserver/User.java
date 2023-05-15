@@ -14,7 +14,7 @@ public class User {
 
     private String object;
 
-    private String action;
+    //private String action;
 
     private String link;
 
@@ -72,13 +72,9 @@ public class User {
     public String getAva_label() {
         return ava_label;
     }
-    public String getAction() {
-        return action;
-    }
 
-    public void setAction(String action) {
-        this.action = action;
-    }
+
+
 
 
 
