@@ -20,7 +20,7 @@ const Videotest = ({route}) => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(`http://localhost:8080/video1`);
+      const response = await axios.get(`http://localhost:8080/video5`);
       setDataList(response.data);
       setSearch(response.data);
       const uniqueObjects = Array.from(new Set(response.data.map(item => item.object)));
@@ -53,10 +53,10 @@ const Videotest = ({route}) => {
   }, []);
 
   const seekTo = useCallback((time) => {
-    playerRef.current?.seekTo(time, true);
+    playerRef.current?.seekTo(time, true);  
   }, []);
 
-  const flexArr = [0.5,3,1,1,1];
+  const flexArr = [0.8,2.9,1,1.1,1]; //영역 크기
 
   const renderHeader = () =>(
     <Row
@@ -69,7 +69,7 @@ const Videotest = ({route}) => {
 
   const renderRow = (rowData) => (
     <Row
-      data={[rowData.id.toString(), rowData.name, rowData.timestamp, rowData.object.toString(), rowData.ava_label]}
+      data={[rowData.id.toString()-203, rowData.name, rowData.timestamp, rowData.object.toString(), rowData.ava_label]}
       style={styles.cell} 
       textStyle={styles.text}
       flexArr={flexArr}
@@ -105,7 +105,7 @@ const Videotest = ({route}) => {
       <YoutubePlayer
         height={222}
         play={playing}
-        videoId={"M9XTAkuSh7A"} //M9XTAkuSh7A
+        videoId={route.params.id5} //
         onChangeState={onStateChange}
         ref={playerRef}
       />
@@ -129,14 +129,16 @@ const Videotest = ({route}) => {
 <Text style={{textAlign:"center", color: 'white', fontSize: 18, fontWeight:"bold"}}>물체, 행동 전체 리스트</Text>
         </TouchableOpacity>
       
-      <ScrollView>
-        <Table borderStyle={{borderWidth: 1, borderColor: "white" }}>
-        {renderHeader()}
-        {search.map((rowData, index) => (
-          <React.Fragment key={index}>{renderRow(rowData)}</React.Fragment>
-        ))}
-      </Table>
-    </ScrollView>
+        <FlatList
+  data={search} // 렌더링할 데이터
+  ListHeaderComponent={renderHeader}
+  renderItem={({item}) => renderRow(item)} // 렌더링할 아이템
+  keyExtractor={(item, index) => index.toString()} // 각 아이템에 대한 고유한 키값을 설정
+  ItemSeparatorComponent={()=>(
+  <View style={styles.separator}/>
+    )}
+/>
+
    
   </View>
 );
@@ -161,6 +163,11 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontWeight: 'bold',
     color: '#fff', // 글씨 색상을 흰색으로 변경
+  },
+  separator: { //flatlist구분선
+    height: 1,
+    
+    backgroundColor: '#ccc',
   },
 });
 

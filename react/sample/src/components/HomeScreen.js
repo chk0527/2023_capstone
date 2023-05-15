@@ -6,11 +6,13 @@ import Videotest from "./Videotest";
 import Videotest2 from "./Videotest2";
 import Videotest3 from "./Videotest3";
 import { SearchBar } from '@rneui/themed';
+import { color } from "@rneui/base";
 
 const HomeScreen = ({route, navigation}) => {
   const [dataList, setDataList] = useState([]);
-  const [query, setQuery] = useState(''); // 검색창 쿼리문 
-  const [search, setSearch] = useState(dataList); // 검색창 입력된 정보
+  const [query, setQuery] = useState(''); 
+  const [search, setSearch] = useState(dataList);
+  
 
   const cancelSource = axios.CancelToken.source();
   useEffect(() => {
@@ -26,18 +28,21 @@ const HomeScreen = ({route, navigation}) => {
       setObjects(uniqueObjects);
       const uniqueActions = Array.from(new Set(response.data.map(item => item.ava_label)));
       setActions(uniqueActions);
+      
     } catch (error) {
       console.log(error);
     }
   };
+  
 
   const updateSearch = (text) => {
-    const filtered = dataList.filter((item) =>
+    const filtered = text && dataList.filter((item) =>
       item.name.toLowerCase().includes(text.toLowerCase()) // 영상제목 검색
     );
     setQuery(text);
-    setSearch(text === '' ? dataList : filtered);
+    setSearch(text === '' ? dataList : (filtered || dataList));
   };
+  
 
   const flexArr = [1,1];
 
@@ -51,6 +56,7 @@ const HomeScreen = ({route, navigation}) => {
   );
 
   const renderRow = (rowData) => (
+    
     <Row
       data={[rowData.title, rowData.description]}
       style={styles.cell} 
@@ -75,6 +81,7 @@ const HomeScreen = ({route, navigation}) => {
           <React.Fragment key={index}>{renderRow(rowData)}</React.Fragment>
         ))}
       </Table>
+      
     </ScrollView>
     </View>
   )

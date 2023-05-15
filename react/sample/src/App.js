@@ -14,6 +14,8 @@ import Videotest from "./components/Videotest";
 import Videotest2 from "./components/Videotest2";
 import Videotest3 from "./components/Videotest3";
 import Videotest4 from "./components/Videotest4";
+import Videotest5 from "./components/Videotest5";
+
 import Tabs from "./components/Navigation/Tabs";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
@@ -37,7 +39,8 @@ function HomeStack(){
            <Stack.Screen name="Detail" component={Videotest}/>
            <Stack.Screen name="Detail2" component={Videotest2}/>
            <Stack.Screen name="Detail3" component={Videotest3}/>
-           <Stack.Screen name="Detail4" component={Videotest4}/>
+           <Stack.Screen name="Detail5" component={Videotest5}/>
+           
        </Stack.Navigator>
     )
 }
