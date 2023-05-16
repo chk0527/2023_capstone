@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+import datetime
 import cv2,time,torch,random,pytorchvideo,warnings,argparse,math
 warnings.filterwarnings("ignore",category=UserWarning)
 import os
@@ -79,7 +80,7 @@ def save_yolopreds_tovideo(yolo_preds,id_to_ava_labels,color_map,output_video,ti
                 ##im = plot_one_box(box,im,color,text)
                 global df
                 if(ava_label != "Unknow"):
-                    df = df.append({'name' : name,'object': yolo_preds.names[int(cls)],'timestamp': timestamp,'ava_label': ava_label,'link': url[17:len(url)]}, ignore_index=True)
+                    df = df.append({'name' : name,'object': yolo_preds.names[int(cls)],'timestamp': str(datetime.timedelta(seconds=timestamp)),'ava_label': ava_label,'link': url[17:len(url)]}, ignore_index=True)
         ##output_video.write(im.astype(np.uint8))
 
 
@@ -120,7 +121,7 @@ def main(config):
    
     video = pytorchvideo.data.encoded_video.EncodedVideo.from_path(new_path)
     a=time.time()
-    for i in range(0,math.ceil(video.duration),3):
+    for i in range(0,math.ceil(video.duration),6):
         video_clips=video.get_clip(i, i+0.05)
         video_clips=video_clips['video']
         if video_clips is None:
