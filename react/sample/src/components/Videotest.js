@@ -1,9 +1,11 @@
 import React, { useState, useCallback, useRef, useEffect } from "react";
-import { Button, View, Alert, Text, StyleSheet, ScrollView, Modal, TouchableOpacity, FlatList } from "react-native";
+import { Button, View, Alert, Text, StyleSheet, ScrollView, Modal, TouchableOpacity, FlatList, TouchableWithoutFeedback } from "react-native";
 import YoutubePlayer from "react-native-youtube-iframe";
 import axios from 'axios';
 import { Table, TableWrapper, Row, Col } from "react-native-table-component";
 import { SearchBar } from '@rneui/themed';
+import {RadioButton} from "react-native-paper";
+
 
 const Videotest = ({route}) => {
   const [playing, setPlaying] = useState(false); // 비디오 재생 
@@ -13,6 +15,9 @@ const Videotest = ({route}) => {
   //const [modalVisible, setModalVisible] = useState(false);
   const [objects, setObjects] = useState([]); // 전체 리스트 표시를 위한 DB에서 받아온 물체 분류
   const [actions, setActions] = useState([]); // 전체 리스트 표시를 위한 DB에서 받아온 행동 분류
+  const [searchOption, setSearchOption] = useState('both');//검색 분류
+  
+
 
   useEffect(() => {
     fetchData();
@@ -20,7 +25,7 @@ const Videotest = ({route}) => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(`http://localhost:8080/video1`);
+      const response = await axios.get(`http://localhost:8080/video1`); //서버get수정
       setDataList(response.data);
       setSearch(response.data);
       const uniqueObjects = Array.from(new Set(response.data.map(item => item.object)));
@@ -32,19 +37,55 @@ const Videotest = ({route}) => {
     }
   };
 
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState(null);
+
+  const [searchOptions,setSearchOptions] = useState([
+    { label: '← 물체,행동 검색', value: 'both' },
+    { label: '← 물체 검색', value: 'object' },
+    { label: '← 행동 검색', value: 'action' },
+  ]);
+  const [selectedOption, setSelectedOption] = useState(searchOptions.length > 0 ? searchOptions[0].value : "both");
+
   const updateSearch = (text) => {
-    const filtered = dataList.filter((item) =>
-      item.object.toLowerCase().includes(text.toLowerCase()) ||
-      item.ava_label.toLowerCase().includes(text.toLowerCase()) // Action 열에 해당하는 데이터도 검색 대상에 포함
-    );
+    //console.log(searchOption) - 검색 필드 테스트
     setQuery(text);
+    let filtered = dataList;
+    if (searchOption === 'object') {
+      filtered = dataList.filter((item) => item.object.toLowerCase().includes(text.toLowerCase()));
+    } else if (searchOption === 'action') {
+      filtered = dataList.filter((item) => item.ava_label.toLowerCase().includes(text.toLowerCase()));
+    } else {
+      filtered = dataList.filter((item) =>
+        item.object.toLowerCase().includes(text.toLowerCase()) ||
+        item.ava_label.toLowerCase().includes(text.toLowerCase())
+      );
+    }
     setSearch(text === '' ? dataList : filtered);
   };
+ 
+  const handleRadioButtonChange = (item, setSelectedOption) => {
+    setSelectedOption(item.value);
+    setSearchOption(item.value);
+    let filtered = dataList;
+    if (item.value === 'object') {
+      filtered = dataList.filter((item) => item.object.toLowerCase().includes(query.toLowerCase()));
+    } else if (item.value === 'action') {
+      filtered = dataList.filter((item) => item.ava_label.toLowerCase().includes(query.toLowerCase()));
+    } else {
+      filtered = dataList.filter((item) =>
+        item.object.toLowerCase().includes(query.toLowerCase()) ||
+        item.ava_label.toLowerCase().includes(query.toLowerCase())
+      );
+    }
+    setSearch(filtered);
+}
   
+
   const onStateChange = useCallback((state) => {
     if (state === "ended") {
       setPlaying(false);
-      Alert.alert("video has finished playing!");
+      Alert.alert("영상 재생이 끝났습니다.");
     }
   }, []);
 
@@ -53,14 +94,17 @@ const Videotest = ({route}) => {
   }, []);
 
   const seekTo = useCallback((time) => {
-    playerRef.current?.seekTo(time, true);
-  }, []);
+    console.log(playing)
+    const [hours, minutes, seconds] = time.split(':').map(Number);
+  const timestamp = seconds+(minutes*60)+(hours*3600)
+  playerRef.current?.seekTo(timestamp, true)
+}, []);
 
-  const flexArr = [0.5,3,1,1,1];
+  const flexArr = [0.8,2,1.1,1]; //영역 크기
 
   const renderHeader = () =>(
     <Row
-      data={['ID', 'Name', 'Time stamp', 'Object', 'Action']}
+      data={['ID', 'Time stamp', 'Object', 'Action']} //제목 제거
       style={styles.head}
       textStyle={styles.text}
       flexArr={flexArr}
@@ -69,16 +113,19 @@ const Videotest = ({route}) => {
 
   const renderRow = (rowData) => (
     <Row
-      data={[rowData.id.toString(), rowData.name, rowData.timestamp, rowData.object.toString(), rowData.ava_label]}
+      data={[rowData.id.toString(), rowData.timestamp, rowData.object.toString(), rowData.ava_label]}
       style={styles.cell} 
       textStyle={styles.text}
       flexArr={flexArr}
       borderColor='white'
-      onPress={() => seekTo(rowData.timestamp)}
+      onPress={() => {
+        seekTo(rowData.timestamp);
+        setPlaying(false); 
+      }}
     />
-  );
+  )
 
-  const playerRef = useRef(null);
+  const playerRef = useRef();
 
   const renderObjectItem = ({item}) => (
     <Text style={styles.item}>{item}</Text>
@@ -98,22 +145,35 @@ const Videotest = ({route}) => {
   const message = `${objectStr}\n=======================\n${actionStr}`;
   //물체, 행동 Alert창
 
-  
+
 
   return (    
     <View style={styles.main}>
       <YoutubePlayer
         height={222}
         play={playing}
-        videoId={"M9XTAkuSh7A"} //M9XTAkuSh7A
+        videoId={"Aqkx40ifYWw"} //
         onChangeState={onStateChange}
         ref={playerRef}
       />
+      <View style={styles.radioButtonContainer}>
+        {searchOptions.map((option) => (
+          <View key={option.value} style={styles.radioButtonItem}>
+            <RadioButton
+              value={option.value}
+              status={selectedOption === option.value ? 'checked' : 'unchecked'}
+              onPress={() => handleRadioButtonChange(option, setSelectedOption)}
+              color="#fff"
+            />
+            <Text style={styles.radioButtonLabel}>{option.label}</Text>
+          </View>
+        ))}
+      </View>
       <SearchBar
         placeholder="검색할 물체나 행동 입력"
         value={query}
         onChange={(event) => updateSearch(event.nativeEvent.text)}
-      />
+      />     
       <TouchableOpacity
             style={{ 
             backgroundColor: '#657',
@@ -126,19 +186,18 @@ const Videotest = ({route}) => {
             Alert.alert('물체, 행동 전체 리스트', message);
             }}
         >
-<Text style={{textAlign:"center", color: 'white', fontSize: 18, fontWeight:"bold"}}>물체, 행동 전체 리스트</Text>
-        </TouchableOpacity>
-      
-      <ScrollView>
-        <Table borderStyle={{borderWidth: 1, borderColor: "white" }}>
-        {renderHeader()}
-        {search.map((rowData, index) => (
-          <React.Fragment key={index}>{renderRow(rowData)}</React.Fragment>
-        ))}
-      </Table>
-    </ScrollView>
-   
-  </View>
+        <Text style={{textAlign:"center", color: 'white', fontSize: 18, fontWeight:"bold"}}>물체, 행동 전체 리스트</Text>
+        </TouchableOpacity>  
+        <FlatList
+          data={search} // 렌더링할 데이터
+          ListHeaderComponent={renderHeader}
+          renderItem={({item}) => renderRow(item)} // 렌더링할 아이템
+          keyExtractor={(item, index) => index.toString()} // 각 아이템에 대한 고유한 키값을 설정
+          ItemSeparatorComponent={() => (
+            <View style={styles.separator} />
+          )}
+        />
+ </View>
 );
 
 };
@@ -161,6 +220,25 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontWeight: 'bold',
     color: '#fff', // 글씨 색상을 흰색으로 변경
+  },
+  separator: { //flatlist구분선
+    height: 1,
+    
+    backgroundColor: '#ccc',
+  },
+  radioButtonContainer: {
+    backgroundColor:'#000',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
+  radioButtonItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  radioButtonLabel: {
+    color:'#9500ff',
+    
+    alignItems:'center'
   },
 });
 

@@ -14,6 +14,7 @@ import movie3 from './../../images/movie3.jpeg'
 import trip1 from './../../images/trip1.jpeg'
 import trip2 from './../../images/trip2.jpeg'
 import trip3 from './../../images/trip3.png'
+import casino from './../../images/casino.jpeg'
 
 const Sqltest = ({navigation}) => {
   
@@ -57,7 +58,7 @@ const Sqltest = ({navigation}) => {
   };
 
   const handlePressVideo5 = () => {
-    navigation.push('Detail5', { id5: filteredLinks5 });
+    navigation.push('Casino', { id5: filteredLinks5 });
   };
 
   const renderItem = ({ item }) => ( // 클릭 가능한 이미지 생성
@@ -89,7 +90,7 @@ const Sqltest = ({navigation}) => {
       <Text style={styles.fonttest}>Movie</Text>
       <Carousel // 캐러셀 사용, 스크롤 뷰 구현
         data={[
-          { id: 1, image: movie1, onPress: handlePressVideo1 },
+          { id: 1, image: casino, onPress: handlePressVideo1 },
           { id: 2, image: movie2, onPress: handlePressVideo2 },
           { id: 3, image: movie3, onPress: handlePressVideo3 },
           { id: 5, image: image1, onPress: handlePressVideo5 }
