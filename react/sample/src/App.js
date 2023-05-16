@@ -19,6 +19,8 @@ import Videotest5 from "./components/Videotest5";
 import Tabs from "./components/Navigation/Tabs";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
+import { MaterialIcons } from "@expo/vector-icons";
+
 
 const Stack=createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -30,17 +32,18 @@ function HomeStack(){
            headerStyle: {
              backgroundColor: '#000000',
            },
-           headerTintColor: '#FF2D00',
-           headerTitleStyle: {
+           headerTintColor: '#ff0000', //<이전화면 글씨 설정
+           headerTitleStyle: {//현재화면 소제목 글씨 설정
              fontWeight: 'bold',
+             fontSize: 40,
+             color:'#ff0000'
            },
          }}>
-           <Stack.Screen name="Main" component={Sqltest}/>
-           <Stack.Screen name="Detail" component={Videotest}/>
+           <Stack.Screen name="Main" component={Sqltest} options={{ title:'HanFlix'}}/> 
+           <Stack.Screen name="Detail" component={Videotest} options={{headerTitleStyle: {fontSize:20}}}/>
            <Stack.Screen name="Detail2" component={Videotest2}/>
            <Stack.Screen name="Detail3" component={Videotest3}/>
-           <Stack.Screen name="Detail5" component={Videotest5}/>
-           
+           <Stack.Screen name="Casino" component={Videotest5} options={{headerTintColor: '#fff',headerTitleStyle:{fontSize:30, color:'#fff'}}}/>
        </Stack.Navigator>
     )
 }
@@ -51,10 +54,16 @@ const App = () =>{
             <Tab.Navigator
               screenOptions={{
                 tabBarStyle: { backgroundColor: '#000' },
-                tabBarActiveTintColor: '#fff'}}
+                tabBarActiveTintColor: '#fff',
+              tabBarLabelStyle:{fontSize: 10},
+            }}
                 >  
-            <Tab.Screen name ="HanFlix" component={HomeStack}/>
-            <Tab.Screen name="Search" component={HomeScreen}/>
+            <Tab.Screen name ="Home" component={HomeStack} 
+            options={{headerShown: false, tabBarLabel: 'Home', tabBarIcon: ({ color, size }) => ( <MaterialIcons name="home" color={color} size={size}/>),
+  }} />
+            <Tab.Screen name="Search" component={HomeScreen}
+            options={{tabBarLabel: 'Search', tabBarIcon: ({ color, size }) => ( <MaterialIcons name="search" color={'#ff0000'} size={size} />),//탭바 아이콘
+  }}/>
             <Tab.Screen name="Categories" component={SearchScreen}/>
             <Tab.Screen name="Options" component={CategoriesScreen}/>
              </Tab.Navigator>
@@ -68,7 +77,7 @@ const MyTheme = {
   colors: {
     background: '#000',
     primary: '#FF2D00',
-    text: '#fff'
+    text: '#fff',
   },
 };
 
