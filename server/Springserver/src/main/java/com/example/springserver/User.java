@@ -10,7 +10,7 @@ public class User {
     private int id;
     private String name;
 
-    private int timestamp;
+    private java.sql.Time timestamp;
 
     private String object;
 
@@ -38,7 +38,7 @@ public class User {
         this.name = name;
     }
 
-    public void setTimestamp(int timestamp) {
+    public void setTimestamp(java.sql.Time timestamp) {
         this.timestamp = timestamp;
     }
 
@@ -61,7 +61,7 @@ public class User {
         return name;
     }
 
-    public int getTimestamp() {
+    public java.sql.Time getTimestamp() {
         return timestamp;
     }
 
