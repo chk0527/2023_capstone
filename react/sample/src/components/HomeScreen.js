@@ -1,4 +1,4 @@
-import { Button, View, Alert, Text, StyleSheet, ScrollView } from "react-native";
+import { Button, View, Alert, Text, StyleSheet, ScrollView, Image, TouchableWithoutFeedback } from "react-native";
 import React, { useState, useCallback, useRef, useEffect } from "react";
 import axios from 'axios';
 import { Table, TableWrapper, Row, Col,Cell } from "react-native-table-component";
@@ -37,36 +37,55 @@ const HomeScreen = ({route, navigation}) => {
 
   const updateSearch = (text) => {
     const filtered = text && dataList.filter((item) =>
-      item.name.toLowerCase().includes(text.toLowerCase()) // 영상제목 검색
+      item.title.toLowerCase().includes(text.toLowerCase()) // 영상제목 검색
     );
     setQuery(text);
     setSearch(text === '' ? dataList : (filtered || dataList));
   };
   
 
-  const flexArr = [1,1];
+  const flexArr = [0.7,1,1];
 
   const renderHeader = () =>(
     <Row
-      data={['Title', 'Description']}
+      data={['Image', 'Title', 'Description']}
       style={styles.head}
       textStyle={styles.text}
       flexArr={flexArr}
     />
   );
 
+  const navigateVideo = (id) =>{
+    switch(id){
+      case 1:
+        return 'Detail'
+      case 4:
+        return 'Detail5'
+    }
+  }
+
+  const imagePress = (rowData) => {
+    console.log('Image Pressed:', rowData.name);
+    navigation.navigate("Detail")
+  }
+
   const renderRow = (rowData) => (
-    
     <Row
-      data={[rowData.title, rowData.description]}
-      style={styles.cell} 
+      data={[
+      <TouchableWithoutFeedback onPress={() => imagePress(rowData)}>
+        <Image source={{uri: rowData.image}} style={{width: 100, height: 150}}/>
+      </TouchableWithoutFeedback>,
+      rowData.title,
+      rowData.description]}
+      style={styles.cell}
       textStyle={styles.text}
       flexArr={flexArr}
       borderColor='white'
-      onPress={() => navigation.navigate("Detail")} // 여기서 화면전환 시켜야할거 같은데 잘 안됨
+      onPress={() => navigation.navigate("Detail")}
     />
+    
   );
-
+  
   return (
     <View style={styles.main}>
       <SearchBar
@@ -81,7 +100,6 @@ const HomeScreen = ({route, navigation}) => {
           <React.Fragment key={index}>{renderRow(rowData)}</React.Fragment>
         ))}
       </Table>
-      
     </ScrollView>
     </View>
   )
