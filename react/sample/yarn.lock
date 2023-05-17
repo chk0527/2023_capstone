@@ -6193,6 +6193,11 @@
   dependencies:
     "events" "^3.2.0"
 
+"react-native-youtube-player@^0.0.2":
+  "integrity" "sha512-rhA3pwudH658Z9Gn6nPKStr5VABsFFZvd6Vw7ActAhy+MdoJA8Xh5MU4Ehm6EqPIeAAXztIkzHC7RauiIdozGQ=="
+  "resolved" "https://registry.npmjs.org/react-native-youtube-player/-/react-native-youtube-player-0.0.2.tgz"
+  "version" "0.0.2"
+
 "react-native@*", "react-native@>=0.57", "react-native@>=0.60", "react-native@0.71.7":
   "integrity" "sha512-Id6iRLS581fJMFGbBl1jP5uSmjExtGOvw5Gvh7694zISXjsRAsFMmU+izs0pyCLqDBoHK7y4BT7WGPGw693nYw=="
   "resolved" "https://registry.npmjs.org/react-native/-/react-native-0.71.7.tgz"
