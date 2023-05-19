@@ -86,6 +86,7 @@ const Sqltest = ({navigation}) => {
   
 
   return (
+    <ScrollView>
     <View style={styles.main}>
       <Text style={styles.fonttest}>Movie</Text>
       <Carousel // 캐러셀 사용, 스크롤 뷰 구현
@@ -129,7 +130,28 @@ const Sqltest = ({navigation}) => {
         onSnapToItem={(index) => setActiveIndex2(index)}
       />
       {renderPage2()}
+      <Text style={styles.fonttest}>Sports</Text>
+      <Carousel
+        data={[
+          { id: 1, image: trip1, onPress: handlePressVideo1 },
+          { id: 2, image: trip2, onPress: handlePressVideo2 },
+          { id: 3, image: trip3, onPress: handlePressVideo3 }
+        ]}
+        renderItem={renderItem}
+        sliderWidth={400}
+        itemWidth={200}
+        loop={true}
+
+        // autoplay={false}
+        //autoplayDelay={500}
+        //autoplayInterval={2000}
+        gap={16}
+        offset={36}
+        onSnapToItem={(index) => setActiveIndex2(index)}
+      />
+      {renderPage2()}
     </View>
+    </ScrollView>
   );
 };
 

@@ -3,12 +3,16 @@ import React, { useState, useCallback, useRef, useEffect } from "react";
 import axios from 'axios';
 import { Table, TableWrapper, Row, Col, Cell } from "react-native-table-component";
 import { SearchBar } from '@rneui/themed';
+import { RadioButton } from "react-native-paper";
 import { color } from "@rneui/base";
 
 const HomeScreen = ({ route, navigation }) => {
   const [dataList, setDataList] = useState([]);
   const [query, setQuery] = useState('');
   const [search, setSearch] = useState(dataList);
+  const [objects, setObjects] = useState([]); // 전체 리스트 표시를 위한 DB에서 받아온 물체 분류
+  const [actions, setActions] = useState([]); // 전체 리스트 표시를 위한 DB에서 받아온 행동 분류
+  const [searchOption, setSearchOption] = useState('both');//검색 분류
 
 
   const cancelSource = axios.CancelToken.source();
@@ -31,6 +35,13 @@ const HomeScreen = ({ route, navigation }) => {
     }
   };
 
+  const [searchOptions,setSearchOptions] = useState([
+    { label: '← 물체,행동 검색', value: 'both' },
+    { label: '← 물체 검색', value: 'object' },
+    { label: '← 행동 검색', value: 'action' },
+  ]);
+
+  const [selectedOption, setSelectedOption] = useState(searchOptions.length > 0 ? searchOptions[0].value : "both");
 
   const updateSearch = (text) => {
     const filtered = text && dataList.filter((item) =>

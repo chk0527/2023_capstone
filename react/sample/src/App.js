@@ -56,7 +56,7 @@ const App = () =>{
             options={{headerShown: false, tabBarLabel: 'Home', tabBarIcon: ({ color, size }) => ( <MaterialIcons name="home" color={color} size={size}/>),
   }} />
             <Tab.Screen name="Search" component={SearchScreen}
-            options={{tabBarLabel: 'Search', tabBarIcon: ({ color, size }) => ( <MaterialIcons name="search" color={'#ff0000'} size={size} />),//탭바 아이콘
+            options={{tabBarLabel: 'Search', tabBarIcon: ({ color, size }) => ( <MaterialIcons name="search" color={color} size={size} />),//탭바 아이콘
   }}/>
 
              </Tab.Navigator>

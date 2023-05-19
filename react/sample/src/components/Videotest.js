@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useRef, useEffect } from "react";
-import { Button, View, Alert, Text, StyleSheet, ScrollView, Modal, TouchableOpacity, FlatList, TouchableWithoutFeedback } from "react-native";
+import { Button, View, Alert, Text, StyleSheet, ScrollView, Modal, TouchableOpacity, FlatList, TouchableWithoutFeedback, Platform } from "react-native";
 import YoutubePlayer from "react-native-youtube-iframe";
 import axios from 'axios';
 import { Table, TableWrapper, Row, Col } from "react-native-table-component";
@@ -39,6 +39,7 @@ const Videotest = ({route}) => {
 
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
+  const playerRef = useRef();
 
   const [searchOptions,setSearchOptions] = useState([
     { label: '← 물체,행동 검색', value: 'both' },
@@ -83,18 +84,19 @@ const Videotest = ({route}) => {
   
 
   const onStateChange = useCallback((state) => {
-    if (state === "ended") {
+    if (state === 'playing') {
+      setPlaying(true);
+    } else if (state === 'paused' || state === 'ended') {
       setPlaying(false);
-      Alert.alert("영상 재생이 끝났습니다.");
     }
   }, []);
 
-  const togglePlaying = useCallback(() => {
-    setPlaying((prev) => !prev);
-  }, []);
+  const handleItemPress = (item) => {
+    setPlaying(false)
+  };
+
 
   const seekTo = useCallback((time) => {
-    console.log(playing)
     const [hours, minutes, seconds] = time.split(':').map(Number);
   const timestamp = seconds+(minutes*60)+(hours*3600)
   playerRef.current?.seekTo(timestamp, true)
@@ -120,12 +122,12 @@ const Videotest = ({route}) => {
       borderColor='white'
       onPress={() => {
         seekTo(rowData.timestamp);
-        setPlaying(false); 
+        handleItemPress(rowData)
       }}
     />
   )
 
-  const playerRef = useRef();
+  
 
   const renderObjectItem = ({item}) => (
     <Text style={styles.item}>{item}</Text>

@@ -142,7 +142,7 @@ const Videotest5 = ({ route }) => {
       <YoutubePlayer
         height={222}
         play={playing}
-        videoId={route.params.id5} //
+        videoId={"Aqkx40ifYWw"} //
         onChangeState={onStateChange}
         ref={playerRef}
       />
