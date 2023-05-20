@@ -6,13 +6,14 @@ import { SearchBar } from '@rneui/themed';
 import { RadioButton } from "react-native-paper";
 import { color } from "@rneui/base";
 
-const HomeScreen = ({ route, navigation }) => {
+const SearchScreen = ({ route, navigation }) => {
   const [dataList, setDataList] = useState([]);
   const [query, setQuery] = useState('');
   const [search, setSearch] = useState(dataList);
   const [objects, setObjects] = useState([]); // 전체 리스트 표시를 위한 DB에서 받아온 물체 분류
   const [actions, setActions] = useState([]); // 전체 리스트 표시를 위한 DB에서 받아온 행동 분류
-  const [searchOption, setSearchOption] = useState('both');//검색 분류
+  const [titles, setTitless] = useState([]); // 전체 리스트 표시를 위한 DB에서 받아온 행동 분류
+  const [searchOption, setSearchOption] = useState('title');//검색 분류
 
 
   const cancelSource = axios.CancelToken.source();
@@ -36,12 +37,29 @@ const HomeScreen = ({ route, navigation }) => {
   };
 
   const [searchOptions,setSearchOptions] = useState([
-    { label: '← 물체,행동 검색', value: 'both' },
+    { label: '← 이름 검색', value: 'title' },
     { label: '← 물체 검색', value: 'object' },
     { label: '← 행동 검색', value: 'action' },
   ]);
 
-  const [selectedOption, setSelectedOption] = useState(searchOptions.length > 0 ? searchOptions[0].value : "both");
+
+  const [selectedOption, setSelectedOption] = useState(searchOptions.length > 0 ? searchOptions[0].value : "title");
+
+  const handleRadioButtonChange = (item, setSelectedOption) => {
+    setSelectedOption(item.value);
+    setSearchOption(item.value);
+    let filtered = dataList;
+if (item.value === 'object') {
+  filtered = dataList.filter((item) => item.object && item.object.toLowerCase().includes(query.toLowerCase()));
+} else if (item.value === 'action') {
+  filtered = dataList.filter((item) => item.ava_label && item.ava_label.toLowerCase().includes(query.toLowerCase()));
+} else {
+  filtered = dataList.filter((item) => item.ava_label && item.ava_label.toLowerCase().includes(query.toLowerCase()));
+}
+
+}
+
+  
 
   const updateSearch = (text) => {
     const filtered = text && dataList.filter((item) =>
@@ -67,13 +85,21 @@ const HomeScreen = ({ route, navigation }) => {
   function navigateVideo(id) {
     switch (id) {
       case 1:
-        return 'Detail'
+        return '카지노'
+      case 2:
+        return 'austria'
+      case 3:
+        return 'cctv'
       case 4:
-        return 'Detail2'
-      case 41:
-        return 'Detail3'
-      case 105:
-        return 'Casino'
+        return 'japan'
+      case 5:
+        return '천원짜리변호사'
+      case 6:
+        return 'taiwan'
+      case 7:
+        return 'inception'
+
+        
     }
   }
 
@@ -105,6 +131,17 @@ const HomeScreen = ({ route, navigation }) => {
         value={query}
         onChange={(event) => updateSearch(event.nativeEvent.text)}
       />
+      {searchOptions.map((option) => (
+          <View key={option.value} style={styles.radioButtonItem}>
+            <RadioButton
+              value={option.value}
+              status={selectedOption === option.value ? 'checked' : 'unchecked'}
+              onPress={() => handleRadioButtonChange(option, setSelectedOption)}
+              color="#fff"
+            />
+            <Text style={styles.radioButtonLabel}>{option.label}</Text>
+          </View>
+        ))}
       <FlatList
         data={search} // 렌더링할 데이터
         ListHeaderComponent={renderHeader}
@@ -167,7 +204,21 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     height: 30,
     marginTop: 10,
-  }
+  },
+  radioButtonContainer: {
+    backgroundColor:'#000',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
+  radioButtonItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  radioButtonLabel: {
+    color:'#9500ff',
+    
+    alignItems:'center'
+  },
 });
 
-export default HomeScreen
+export default SearchScreen

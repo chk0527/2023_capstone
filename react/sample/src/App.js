@@ -12,6 +12,7 @@ import Videotest3 from "./components/Videotest3";
 import Videotest4 from "./components/Videotest4";
 import Videotest5 from "./components/Videotest5";
 import Videotest6 from "./components/Videotest6";
+import Videotest7 from "./components/Videotest7";
 
 import Tabs from "./components/Navigation/Tabs";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -51,6 +52,7 @@ function HomeStack(navigation){
            <Stack.Screen name="japan" component={Videotest4} options={{title:'Japan', headerTitleStyle:{fontSize:30, fontWeight:'bold', backgroundColor:'#000'}}}/>
            <Stack.Screen name="천원짜리변호사" component={Videotest5} options={{title:'천원짜리변호사', headerTitleStyle:{fontSize:30, fontWeight:'bold', backgroundColor:'#000'}}}/>
            <Stack.Screen name="taiwan" component={Videotest6} options={{title:'Taiwan', headerTitleStyle:{fontSize:30, fontWeight:'bold', backgroundColor:'#000'}}}/>
+           <Stack.Screen name="인셉션" component={Videotest7} options={{title:'인셉션', headerTitleStyle:{fontSize:30, fontWeight:'bold', backgroundColor:'#000'}}}/>
        </Stack.Navigator>
     )
 }

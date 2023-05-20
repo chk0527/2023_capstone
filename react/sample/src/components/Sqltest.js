@@ -11,6 +11,7 @@ import trip3 from './../../images/trip3.png'
 import casino from './../../images/casino.jpeg'
 import lawyer from './../../images/lawyer.jpeg'
 import cctva from './../../images/cctv.jpeg'
+import inception from './../../images/inception.jpeg'
 
 const Sqltest = ({navigation}) => {
   
@@ -37,6 +38,7 @@ const Sqltest = ({navigation}) => {
   const filteredLinks4 = dataList.filter((item) => item.id === 1326).map((item) => item.link); //japan
   const filteredLinks5 = dataList.filter((item) => item.id === 1481).map((item) => item.link); //lawyer
   const filteredLinks6 = dataList.filter((item) => item.id === 2880).map((item) => item.link); //tai
+  const filteredLinks7 = dataList.filter((item) => item.id === 3256).map((item) => item.link); //inception
 
   const handlePressVideo1 = () => { // 클릭 하였을 때의 네비게이션 이벤트 
     navigation.push('카지노', { id1: filteredLinks }); //@네비게이션이름 수정
@@ -59,7 +61,10 @@ const Sqltest = ({navigation}) => {
   };
 
   const handlePressVideo6 = () => {
-    navigation.push('taiwan', { id5: filteredLinks6 });
+    navigation.push('taiwan', { id6: filteredLinks6 });
+  };
+  const handlePressVideo7 = () => {
+    navigation.push('인셉션', { id7: filteredLinks7 });
   };
 
   const renderItem = ({ item }) => ( // 클릭 가능한 이미지 생성
@@ -72,7 +77,7 @@ const Sqltest = ({navigation}) => {
 
   const renderPage = () => ( // 스크롤 표시
     <View style={styles.pageIndicator}>
-      {[...Array(2)].map((_, i) => (
+      {[...Array(3)].map((_, i) => (
         <View key={i} style={[styles.dot, i === activeIndex && styles.activeDot]} />
       ))}
     </View>
@@ -101,7 +106,8 @@ const Sqltest = ({navigation}) => {
       <Carousel // 캐러셀 사용, 스크롤 뷰 구현
         data={[
           { id: 1, image: casino, onPress: handlePressVideo1 },
-          { id: 5, image: lawyer, onPress: handlePressVideo5 }
+          { id: 5, image: lawyer, onPress: handlePressVideo5 },
+          { id: 7, image: inception, onPress:handlePressVideo7}
         ]}
         renderItem={renderItem}
         sliderWidth={600}
