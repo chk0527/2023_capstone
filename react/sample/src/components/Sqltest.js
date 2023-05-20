@@ -4,13 +4,7 @@ import Carousel from 'react-native-snap-carousel';
 import PropTypes from 'deprecated-react-native-prop-types';
 
 import axios from 'axios';
-import image1 from './../../images/testimage.jpeg'
-import image2 from './../../images/testimage2.jpeg'
-import image3 from './../../images/testimage3.jpeg'
-import image4 from './../../assets/icon.png'
-import movie1 from './../../images/movie1.jpeg'
-import movie2 from './../../images/movie2.jpeg'
-import movie3 from './../../images/movie3.jpeg'
+
 import trip1 from './../../images/trip1.jpeg'
 import trip2 from './../../images/trip2.jpeg'
 import trip3 from './../../images/trip3.png'
