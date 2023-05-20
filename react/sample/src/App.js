@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StatusBar, StyleSheet, Image } from "react-native";
+import { View, Text, StatusBar, StyleSheet, Image, Button, TouchableOpacity, Alert} from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
@@ -11,6 +11,7 @@ import Videotest2 from "./components/Videotest2";
 import Videotest3 from "./components/Videotest3";
 import Videotest4 from "./components/Videotest4";
 import Videotest5 from "./components/Videotest5";
+import Videotest6 from "./components/Videotest6";
 
 import Tabs from "./components/Navigation/Tabs";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -19,7 +20,8 @@ import { MaterialIcons } from "@expo/vector-icons";
 const Stack=createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
-function HomeStack(){
+
+function HomeStack(navigation){
     return(
         <Stack.Navigator initialRouteName="Home"
         screenOptions={{
@@ -34,10 +36,21 @@ function HomeStack(){
            },
          }}>
            <Stack.Screen name="Main" component={Sqltest} options={{ title:'HanFlix'}}/> 
-           <Stack.Screen name="Detail" component={Videotest} options={{headerTitleStyle: {fontSize:20}}}/>
-           <Stack.Screen name="Detail2" component={Videotest2}/>
-           <Stack.Screen name="Detail3" component={Videotest3}/>
-           <Stack.Screen name="Casino" component={Videotest5} options={{headerTintColor: '#fff',headerTitleStyle:{fontSize:30, color:'#fff'}}}/>
+           <Stack.Screen name="카지노" component={Videotest} options={{title:"카지노", headerTitleStyle: {fontSize:30, fontWeight:'bold', backgroundColor:'#000'}}}/>
+           <Stack.Screen name="austria" component={Videotest2} options={{title:"Austria", headerTitleStyle: {fontSize:30, fontWeight:'bold', backgroundColor:'#000'},
+          headerRight: () => (
+            <TouchableOpacity
+              onPress={() => Alert.alert('@@')}
+              style={{ marginRight: 10 }}
+            >
+              <Text style={{ color: '#fff', fontSize: 16 }}>Search</Text>
+            </TouchableOpacity>
+            ),
+            }}/>
+           <Stack.Screen name="cctv" component={Videotest3} options={{title:'그것이 알고싶다 cctv', headerTitleStyle:{fontSize:30, fontWeight:'bold', backgroundColor:'#000'}}}/>
+           <Stack.Screen name="japan" component={Videotest4} options={{title:'Japan', headerTitleStyle:{fontSize:30, fontWeight:'bold', backgroundColor:'#000'}}}/>
+           <Stack.Screen name="천원짜리변호사" component={Videotest5} options={{title:'천원짜리변호사', headerTitleStyle:{fontSize:30, fontWeight:'bold', backgroundColor:'#000'}}}/>
+           <Stack.Screen name="taiwan" component={Videotest6} options={{title:'Taiwan', headerTitleStyle:{fontSize:30, fontWeight:'bold', backgroundColor:'#000'}}}/>
        </Stack.Navigator>
     )
 }

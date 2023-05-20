@@ -51,8 +51,9 @@ const HomeScreen = ({ route, navigation }) => {
     setSearch(text === '' ? dataList : (filtered || dataList));
   };
 
+  
 
-  const flexArr = [0.7, 1, 1];
+  const flexArr = [0.7, 0.5, 1.5,1];
 
   const renderHeader = () => (
     <Row
