@@ -3,11 +3,7 @@ import { View, Text, StatusBar, StyleSheet, Image } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import Texttest from "./components/Texttest";
 import Sqltest from "./components/Sqltest";
-
-import CategoriesScreen from "./components/CategoriesScreen";
-import HomeScreen from "./components/HomeScreen";
 import SearchScreen from "./components/SearchScreen";
 
 import Videotest from "./components/Videotest";
@@ -18,9 +14,7 @@ import Videotest5 from "./components/Videotest5";
 
 import Tabs from "./components/Navigation/Tabs";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-
 import { MaterialIcons } from "@expo/vector-icons";
-
 
 const Stack=createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -61,11 +55,10 @@ const App = () =>{
             <Tab.Screen name ="Home" component={HomeStack} 
             options={{headerShown: false, tabBarLabel: 'Home', tabBarIcon: ({ color, size }) => ( <MaterialIcons name="home" color={color} size={size}/>),
   }} />
-            <Tab.Screen name="Search" component={HomeScreen}
-            options={{tabBarLabel: 'Search', tabBarIcon: ({ color, size }) => ( <MaterialIcons name="search" color={'#ff0000'} size={size} />),//탭바 아이콘
+            <Tab.Screen name="Search" component={SearchScreen}
+            options={{tabBarLabel: 'Search', tabBarIcon: ({ color, size }) => ( <MaterialIcons name="search" color={color} size={size} />),//탭바 아이콘
   }}/>
-            <Tab.Screen name="Categories" component={SearchScreen}/>
-            <Tab.Screen name="Options" component={CategoriesScreen}/>
+
              </Tab.Navigator>
        
         </NavigationContainer>

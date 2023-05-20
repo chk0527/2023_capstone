@@ -2,10 +2,10 @@ import React, { useState, useCallback, useRef, useEffect } from "react";
 import { Button, View, Alert, Text, StyleSheet, ScrollView, Modal, TouchableOpacity, FlatList } from "react-native";
 import YoutubePlayer from "react-native-youtube-iframe";
 import axios from 'axios';
-import { Table, TableWrapper, Row, Col,Cell } from "react-native-table-component";
+import { Table, TableWrapper, Row, Col, Cell } from "react-native-table-component";
 import { SearchBar } from '@rneui/themed';
 
-const Videotest = ({route}) => {
+const Videotest = ({ route }) => {
   const [playing, setPlaying] = useState(false); // 비디오 재생 
   const [dataList, setDataList] = useState([]); // DB에서 받아온 데이터 리스트
   const [query, setQuery] = useState(''); // 검색창 쿼리문 
@@ -40,7 +40,7 @@ const Videotest = ({route}) => {
     setQuery(text);
     setSearch(text === '' ? dataList : filtered);
   };
-  
+
   const onStateChange = useCallback((state) => {
     if (state === "ended") {
       setPlaying(false);
@@ -56,9 +56,9 @@ const Videotest = ({route}) => {
     playerRef.current?.seekTo(time, true);
   }, []);
 
-  const flexArr = [0.5,3,1,1,1];
+  const flexArr = [0.5, 3, 1, 1, 1];
 
-  const renderHeader = () =>(
+  const renderHeader = () => (
     <Row
       data={['ID', 'Name', 'Time stamp', 'Object', 'Action']}
       style={styles.head}
@@ -69,23 +69,23 @@ const Videotest = ({route}) => {
 
   const renderRow = (rowData, index) => (
     <Row
-      data={[index+1, rowData.name, rowData.timestamp, rowData.object.toString(), rowData.ava_label]}
-      style={styles.cell} 
+      data={[index + 1, rowData.name, rowData.timestamp, rowData.object.toString(), rowData.ava_label]}
+      style={styles.cell}
       textStyle={styles.text}
       flexArr={flexArr}
       borderColor='white'
       onPress={() => seekTo(rowData.timestamp)}
     />
   );
-  
+
 
   const playerRef = useRef(null);
 
-  const renderObjectItem = ({item}) => (
+  const renderObjectItem = ({ item }) => (
     <Text style={styles.item}>{item}</Text>
   );
 
-  const renderActionItem = ({item}) => (
+  const renderActionItem = ({ item }) => (
     <Text style={styles.item}>{item}</Text>
   );
 
@@ -99,9 +99,9 @@ const Videotest = ({route}) => {
   const message = `${objectStr}\n=======================\n${actionStr}`;
   //물체, 행동 Alert창
 
-  
 
-  return (    
+
+  return (
     <View style={styles.main}>
       <YoutubePlayer
         height={222}
@@ -116,31 +116,31 @@ const Videotest = ({route}) => {
         onChange={(event) => updateSearch(event.nativeEvent.text)}
       />
       <TouchableOpacity
-            style={{ 
-            backgroundColor: '#657',
-            padding: 16,
-            margin: 10,
-            borderRadius: 100,
-            }}
-            
-            onPress={() => {
-            Alert.alert('물체, 행동 전체 리스트', message);
-            }}
-        >
-<Text style={{textAlign:"center", color: 'white', fontSize: 18, fontWeight:"bold"}}>물체, 행동 전체 리스트</Text>
-        </TouchableOpacity>
-      
+        style={{
+          backgroundColor: '#657',
+          padding: 16,
+          margin: 10,
+          borderRadius: 100,
+        }}
+
+        onPress={() => {
+          Alert.alert('물체, 행동 전체 리스트', message);
+        }}
+      >
+        <Text style={{ textAlign: "center", color: 'white', fontSize: 18, fontWeight: "bold" }}>물체, 행동 전체 리스트</Text>
+      </TouchableOpacity>
+
       <ScrollView>
-        <Table borderStyle={{borderWidth: 1, borderColor: "white" }}>
-        {renderHeader()}
-        {search.map((rowData, index) => (
-        <React.Fragment key={index}>{renderRow(rowData, index)}</React.Fragment>
-      ))}
-      </Table>
-    </ScrollView>
-   
-  </View>
-);
+        <Table borderStyle={{ borderWidth: 1, borderColor: "white" }}>
+          {renderHeader()}
+          {search.map((rowData, index) => (
+            <React.Fragment key={index}>{renderRow(rowData, index)}</React.Fragment>
+          ))}
+        </Table>
+      </ScrollView>
+
+    </View>
+  );
 
 };
 
