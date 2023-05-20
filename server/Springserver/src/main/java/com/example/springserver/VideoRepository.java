@@ -13,5 +13,5 @@ import java.util.Optional;
 public interface VideoRepository extends JpaRepository<VideoInfo, Integer> {
 
     @Query("SELECT v from VideoInfo v")
-    List<VideoInfo> findVideoInfoData();
+    List<VideoInfo> findVideoInfoData();//@
 }
