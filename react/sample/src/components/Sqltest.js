@@ -15,6 +15,8 @@ import trip1 from './../../images/trip1.jpeg'
 import trip2 from './../../images/trip2.jpeg'
 import trip3 from './../../images/trip3.png'
 import casino from './../../images/casino.jpeg'
+import lawyer from './../../images/lawyer.jpeg'
+import cctva from './../../images/cctv.jpeg'
 
 const Sqltest = ({navigation}) => {
   
@@ -35,30 +37,35 @@ const Sqltest = ({navigation}) => {
     }
   };
 
-  const filteredLinks = dataList.filter((item) => item.id === 1).map((item) => item.link); // DB에 있는 데이터 중 각 영상의 1번 행을 가져옴
-  const filteredLinks2 = dataList.filter((item) => item.id === 41).map((item) => item.link);
-  const filteredLinks3 = dataList.filter((item) => item.id === 105).map((item) => item.link);
-  const filteredLinks4 = dataList.filter((item) => item.id === 170).map((item) => item.link);
-  const filteredLinks5 = dataList.filter((item) => item.id === 204).map((item) => item.link);
+  const filteredLinks = dataList.filter((item) => item.id === 1).map((item) => item.link); // DB에 있는 데이터 중 각 영상의 1번 행을 가져옴 @id수정 //카지노
+  const filteredLinks2 = dataList.filter((item) => item.id === 541).map((item) => item.link); //austria
+  const filteredLinks3 = dataList.filter((item) => item.id === 785).map((item) => item.link); //cctv
+  const filteredLinks4 = dataList.filter((item) => item.id === 1326).map((item) => item.link); //japan
+  const filteredLinks5 = dataList.filter((item) => item.id === 1481).map((item) => item.link); //lawyer
+  const filteredLinks6 = dataList.filter((item) => item.id === 2880).map((item) => item.link); //tai
 
   const handlePressVideo1 = () => { // 클릭 하였을 때의 네비게이션 이벤트 
-    navigation.push('Detail', { id1: filteredLinks });
+    navigation.push('카지노', { id1: filteredLinks }); //@네비게이션이름 수정
   };
 
   const handlePressVideo2 = () => {
-    navigation.push('Detail2', { id2: filteredLinks2 });
+    navigation.push('austria', { id2: filteredLinks2 });
   };
 
   const handlePressVideo3 = () => {
-    navigation.push('Detail3', { id3: filteredLinks3 });
+    navigation.push('cctv', { id3: filteredLinks3 });
   };
 
   const handlePressVideo4 = () => {
-    navigation.push('Detail4', { id4: filteredLinks4 });
+    navigation.push('japan', { id4: filteredLinks4 });
   };
 
   const handlePressVideo5 = () => {
-    navigation.push('Casino', { id5: filteredLinks5 });
+    navigation.push('천원짜리변호사', { id5: filteredLinks5 });
+  };
+
+  const handlePressVideo6 = () => {
+    navigation.push('taiwan', { id5: filteredLinks6 });
   };
 
   const renderItem = ({ item }) => ( // 클릭 가능한 이미지 생성
@@ -71,7 +78,7 @@ const Sqltest = ({navigation}) => {
 
   const renderPage = () => ( // 스크롤 표시
     <View style={styles.pageIndicator}>
-      {[...Array(4)].map((_, i) => (
+      {[...Array(2)].map((_, i) => (
         <View key={i} style={[styles.dot, i === activeIndex && styles.activeDot]} />
       ))}
     </View>
@@ -79,6 +86,14 @@ const Sqltest = ({navigation}) => {
   const renderPage2 = () => (
     <View style={styles.pageIndicator}>
       {[...Array(3)].map((_, i) => (
+        <View key={i} style={[styles.dot, i === activeIndex2 && styles.activeDot]} />
+      ))}
+    </View>
+  );
+
+  const renderPage3 = () => (
+    <View style={styles.pageIndicator}>
+      {[...Array(1)].map((_, i) => (
         <View key={i} style={[styles.dot, i === activeIndex2 && styles.activeDot]} />
       ))}
     </View>
@@ -92,9 +107,7 @@ const Sqltest = ({navigation}) => {
       <Carousel // 캐러셀 사용, 스크롤 뷰 구현
         data={[
           { id: 1, image: casino, onPress: handlePressVideo1 },
-          { id: 2, image: movie2, onPress: handlePressVideo2 },
-          { id: 3, image: movie3, onPress: handlePressVideo3 },
-          { id: 5, image: image1, onPress: handlePressVideo5 }
+          { id: 5, image: lawyer, onPress: handlePressVideo5 }
         ]}
         renderItem={renderItem}
         sliderWidth={600}
@@ -113,9 +126,9 @@ const Sqltest = ({navigation}) => {
       <Text style={styles.fonttest}>Trip</Text>
       <Carousel
         data={[
-          { id: 1, image: trip1, onPress: handlePressVideo1 },
-          { id: 2, image: trip2, onPress: handlePressVideo2 },
-          { id: 3, image: trip3, onPress: handlePressVideo3 }
+          { id: 2, image: trip1, onPress: handlePressVideo2 },
+          { id: 4, image: trip2, onPress: handlePressVideo4 },
+          { id: 6, image: trip3, onPress: handlePressVideo6 }
         ]}
         renderItem={renderItem}
         sliderWidth={400}
@@ -130,12 +143,10 @@ const Sqltest = ({navigation}) => {
         onSnapToItem={(index) => setActiveIndex2(index)}
       />
       {renderPage2()}
-      <Text style={styles.fonttest}>Sports</Text>
+      <Text style={styles.fonttest}>Accident&Incident</Text>
       <Carousel
         data={[
-          { id: 1, image: trip1, onPress: handlePressVideo1 },
-          { id: 2, image: trip2, onPress: handlePressVideo2 },
-          { id: 3, image: trip3, onPress: handlePressVideo3 }
+          { id: 3, image: cctva, onPress: handlePressVideo3 }
         ]}
         renderItem={renderItem}
         sliderWidth={400}
@@ -149,7 +160,7 @@ const Sqltest = ({navigation}) => {
         offset={36}
         onSnapToItem={(index) => setActiveIndex2(index)}
       />
-      {renderPage2()}
+      {renderPage3()}
     </View>
     </ScrollView>
   );

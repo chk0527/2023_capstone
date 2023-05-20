@@ -7,7 +7,7 @@ import { SearchBar } from '@rneui/themed';
 import {RadioButton} from "react-native-paper";
 
 
-const Videotest = ({route}) => {
+const Videotest = ({route, navigation}) => { //@1-const명 수정
   const [playing, setPlaying] = useState(false); // 비디오 재생 
   const [dataList, setDataList] = useState([]); // DB에서 받아온 데이터 리스트
   const [query, setQuery] = useState(''); // 검색창 쿼리문 
@@ -25,7 +25,7 @@ const Videotest = ({route}) => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(`http://localhost:8080/video1`); //서버get수정
+      const response = await axios.get(`http://localhost:8080/video1`); //서버get수정 @서버get수정, 서버 쿼리문 수정
       setDataList(response.data);
       setSearch(response.data);
       const uniqueObjects = Array.from(new Set(response.data.map(item => item.object)));
@@ -47,6 +47,16 @@ const Videotest = ({route}) => {
     { label: '← 행동 검색', value: 'action' },
   ]);
   const [selectedOption, setSelectedOption] = useState(searchOptions.length > 0 ? searchOptions[0].value : "both");
+
+  const handleSort = (column) => {
+    let sortedData = [...dataList];
+    if (column === 'id') {
+      sortedData.sort((a, b) => b.id - a.id); // ID 열을 기준으로 역순으로 정렬
+    }
+    // 다른 열에 대한 정렬 로직 추가 가능
+
+    setSearch(sortedData);
+  };
 
   const updateSearch = (text) => {
     //console.log(searchOption) - 검색 필드 테스트
@@ -106,16 +116,17 @@ const Videotest = ({route}) => {
 
   const renderHeader = () =>(
     <Row
-      data={['ID', 'Time stamp', 'Object', 'Action']} //제목 제거
-      style={styles.head}
-      textStyle={styles.text}
-      flexArr={flexArr}
-    />
+    data={['ID', 'Time stamp', 'Object', 'Action']}
+    style={styles.head}
+    textStyle={styles.text}
+    flexArr={flexArr}
+    onPress={() => handleSort('id')} // ID 열 클릭 시 데이터 정렬
+  />
   );
 
-  const renderRow = (rowData) => (
+  const renderRow = (rowData,index) => (
     <Row
-      data={[rowData.id.toString(), rowData.timestamp, rowData.object.toString(), rowData.ava_label]}
+      data={[rowData.id.toString(), rowData.timestamp, rowData.object.toString(), rowData.ava_label]} //@id순번 빼주기
       style={styles.cell} 
       textStyle={styles.text}
       flexArr={flexArr}
@@ -154,7 +165,7 @@ const Videotest = ({route}) => {
       <YoutubePlayer
         height={222}
         play={playing}
-        videoId={"Aqkx40ifYWw"} //
+        videoId={"Aqkx40ifYWw"} //@id수정
         onChangeState={onStateChange}
         ref={playerRef}
       />
@@ -245,9 +256,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default Videotest;
-
-
-
-
-
+export default Videotest; //@const명 수정

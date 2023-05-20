@@ -1,14 +1,13 @@
 import React, { useState, useCallback, useRef, useEffect } from "react";
-import { Button, View, Alert, Text, StyleSheet, ScrollView, Modal, TouchableOpacity, FlatList } from "react-native";
+import { Button, View, Alert, Text, StyleSheet, ScrollView, Modal, TouchableOpacity, FlatList, TouchableWithoutFeedback, Platform } from "react-native";
 import YoutubePlayer from "react-native-youtube-iframe";
 import axios from 'axios';
 import { Table, TableWrapper, Row, Col } from "react-native-table-component";
 import { SearchBar } from '@rneui/themed';
-import DropDownPicker from 'react-native-dropdown-picker';
-import { RadioButton } from "react-native-paper";
+import {RadioButton} from "react-native-paper";
 
 
-const Videotest2 = ({ route }) => {
+const Videotest2 = ({route, navigation}) => { //@1-const명 수정
   const [playing, setPlaying] = useState(false); // 비디오 재생 
   const [dataList, setDataList] = useState([]); // DB에서 받아온 데이터 리스트
   const [query, setQuery] = useState(''); // 검색창 쿼리문 
@@ -17,7 +16,8 @@ const Videotest2 = ({ route }) => {
   const [objects, setObjects] = useState([]); // 전체 리스트 표시를 위한 DB에서 받아온 물체 분류
   const [actions, setActions] = useState([]); // 전체 리스트 표시를 위한 DB에서 받아온 행동 분류
   const [searchOption, setSearchOption] = useState('both');//검색 분류
-  const [selectedOption, setSelectedOption] = useState(searchOption);
+  
+
 
   useEffect(() => {
     fetchData();
@@ -25,7 +25,7 @@ const Videotest2 = ({ route }) => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(`http://localhost:8080/video2`);
+      const response = await axios.get(`http://localhost:8080/video2`); //서버get수정 @서버get수정, 서버 쿼리문 수정
       setDataList(response.data);
       setSearch(response.data);
       const uniqueObjects = Array.from(new Set(response.data.map(item => item.object)));
@@ -39,15 +39,27 @@ const Videotest2 = ({ route }) => {
 
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
+  const playerRef = useRef();
 
-  const [searchOptions, setSearchOptions] = useState([
-    { label: 'Both', value: 'both' },
-    { label: 'Object', value: 'object' },
-    { label: 'Action', value: 'action' },
+  const [searchOptions,setSearchOptions] = useState([
+    { label: '← 물체,행동 검색', value: 'both' },
+    { label: '← 물체 검색', value: 'object' },
+    { label: '← 행동 검색', value: 'action' },
   ]);
+  const [selectedOption, setSelectedOption] = useState(searchOptions.length > 0 ? searchOptions[0].value : "both");
+
+  const handleSort = (column) => {
+    let sortedData = [...dataList];
+    if (column === 'id') {
+      sortedData.sort((a, b) => b.id - a.id); // ID 열을 기준으로 역순으로 정렬
+    }
+    // 다른 열에 대한 정렬 로직 추가 가능
+
+    setSearch(sortedData);
+  };
 
   const updateSearch = (text) => {
-    console.log(searchOption)
+    //console.log(searchOption) - 검색 필드 테스트
     setQuery(text);
     let filtered = dataList;
     if (searchOption === 'object') {
@@ -62,7 +74,9 @@ const Videotest2 = ({ route }) => {
     }
     setSearch(text === '' ? dataList : filtered);
   };
-  const handleDropdownChange = (item) => {
+ 
+  const handleRadioButtonChange = (item, setSelectedOption) => {
+    setSelectedOption(item.value);
     setSearchOption(item.value);
     let filtered = dataList;
     if (item.value === 'object') {
@@ -76,52 +90,61 @@ const Videotest2 = ({ route }) => {
       );
     }
     setSearch(filtered);
-  }
+}
+  
 
   const onStateChange = useCallback((state) => {
-    if (state === "ended") {
+    if (state === 'playing') {
+      setPlaying(true);
+    } else if (state === 'paused' || state === 'ended') {
       setPlaying(false);
-      Alert.alert("영상 재생이 끝났습니다.");
     }
   }, []);
 
-  const togglePlaying = useCallback(() => {
-    setPlaying((prev) => !prev);
-  }, []);
+  const handleItemPress = (item) => {
+    setPlaying(false)
+  };
+
 
   const seekTo = useCallback((time) => {
-    playerRef.current?.seekTo(time, true);
-  }, []);
+    const [hours, minutes, seconds] = time.split(':').map(Number);
+  const timestamp = seconds+(minutes*60)+(hours*3600)
+  playerRef.current?.seekTo(timestamp, true)
+}, []);
 
-  const flexArr = [0.8, 2.9, 1, 1.1, 1]; //영역 크기
+  const flexArr = [0.8,2,1.1,1]; //영역 크기
 
-  const renderHeader = () => (
+  const renderHeader = () =>(
     <Row
-      data={['ID', 'Name', 'Time stamp', 'Object', 'Action']}
-      style={styles.head}
-      textStyle={styles.text}
-      flexArr={flexArr}
-    />
+    data={['ID', 'Time stamp', 'Object', 'Action']}
+    style={styles.head}
+    textStyle={styles.text}
+    flexArr={flexArr}
+    onPress={() => handleSort('id')} // ID 열 클릭 시 데이터 정렬
+  />
   );
 
-  const renderRow = (rowData) => (
+  const renderRow = (rowData,index) => (
     <Row
-      data={[rowData.id.toString() - 203, rowData.name, rowData.timestamp, rowData.object.toString(), rowData.ava_label]}
-      style={styles.cell}
+      data={[rowData.id.toString()-540, rowData.timestamp, rowData.object.toString(), rowData.ava_label]} //@id순번 빼주기
+      style={styles.cell} 
       textStyle={styles.text}
       flexArr={flexArr}
       borderColor='white'
-      onPress={() => seekTo(rowData.timestamp)}
+      onPress={() => {
+        seekTo(rowData.timestamp);
+        handleItemPress(rowData)
+      }}
     />
-  );
+  )
 
-  const playerRef = useRef(null);
+  
 
-  const renderObjectItem = ({ item }) => (
+  const renderObjectItem = ({item}) => (
     <Text style={styles.item}>{item}</Text>
   );
 
-  const renderActionItem = ({ item }) => (
+  const renderActionItem = ({item}) => (
     <Text style={styles.item}>{item}</Text>
   );
 
@@ -137,63 +160,58 @@ const Videotest2 = ({ route }) => {
 
 
 
-  return (
+  return (    
     <View style={styles.main}>
       <YoutubePlayer
         height={222}
         play={playing}
-        videoId={route.params.id5} //
+        videoId={"gcgwwFPqrSA?list=PLgo6yDyOB1JWJqQFhLvvald4J_fb-wG4y"} //@id수정
         onChangeState={onStateChange}
         ref={playerRef}
       />
+      <View style={styles.radioButtonContainer}>
+        {searchOptions.map((option) => (
+          <View key={option.value} style={styles.radioButtonItem}>
+            <RadioButton
+              value={option.value}
+              status={selectedOption === option.value ? 'checked' : 'unchecked'}
+              onPress={() => handleRadioButtonChange(option, setSelectedOption)}
+              color="#fff"
+            />
+            <Text style={styles.radioButtonLabel}>{option.label}</Text>
+          </View>
+        ))}
+      </View>
       <SearchBar
         placeholder="검색할 물체나 행동 입력"
         value={query}
         onChange={(event) => updateSearch(event.nativeEvent.text)}
-      />
-
-      <DropDownPicker
-        open={open}
-        value={value}
-        setOpen={setOpen}
-        setValue={setValue}
-        placeholder="검색할 영역 선택"
-        items={searchOptions}
-        defaultValue={searchOption}
-        onSelectItem={handleDropdownChange}
-        containerStyle={styles.dropdownContainer}
-        style={styles.dropdown}
-        itemStyle={styles.dropdownItem}
-        labelStyle={styles.dropdownLabel}
-        dropDownStyle={styles.dropdownMenu}
-      />
-
+      />     
       <TouchableOpacity
-        style={{
-          backgroundColor: '#657',
-          padding: 16,
-          margin: 10,
-          borderRadius: 100,
-        }}
-
-        onPress={() => {
-          Alert.alert('물체, 행동 전체 리스트', message);
-        }}
-      >
-        <Text style={{ textAlign: "center", color: 'white', fontSize: 18, fontWeight: "bold" }}>물체, 행동 전체 리스트</Text>
-      </TouchableOpacity>
-
-      <FlatList
-        data={search} // 렌더링할 데이터
-        ListHeaderComponent={renderHeader}
-        renderItem={({ item }) => renderRow(item)} // 렌더링할 아이템
-        keyExtractor={(item, index) => index.toString()} // 각 아이템에 대한 고유한 키값을 설정
-        ItemSeparatorComponent={() => (
-          <View style={styles.separator} />
-        )}
-      />
-    </View>
-  );
+            style={{ 
+            backgroundColor: '#657',
+            padding: 16,
+            margin: 10,
+            borderRadius: 100,
+            }}
+            
+            onPress={() => {
+            Alert.alert('물체, 행동 전체 리스트', message);
+            }}
+        >
+        <Text style={{textAlign:"center", color: 'white', fontSize: 18, fontWeight:"bold"}}>물체, 행동 전체 리스트</Text>
+        </TouchableOpacity>  
+        <FlatList
+          data={search} // 렌더링할 데이터
+          ListHeaderComponent={renderHeader}
+          renderItem={({item}) => renderRow(item)} // 렌더링할 아이템
+          keyExtractor={(item, index) => index.toString()} // 각 아이템에 대한 고유한 키값을 설정
+          ItemSeparatorComponent={() => (
+            <View style={styles.separator} />
+          )}
+        />
+ </View>
+);
 
 };
 
@@ -218,39 +236,24 @@ const styles = StyleSheet.create({
   },
   separator: { //flatlist구분선
     height: 1,
-
+    
     backgroundColor: '#ccc',
   },
-  dropdownContainer: {
-    height: 40,
-    width: '80%',
-    alignSelf: 'center',
-    marginBottom: 10,
+  radioButtonContainer: {
+    backgroundColor:'#000',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
   },
-  dropdown: {
-    backgroundColor: '#fafafa',
-    borderColor: '#657',
-    borderWidth: 1,
-    borderRadius: 4,
+  radioButtonItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
-  dropdownItem: {
-    justifyContent: 'flex-start',
-  },
-  dropdownLabel: {
-    fontSize: 16,
-    color: '#657',
-  },
-  dropdownMenu: {
-    backgroundColor: '#fafafa',
-    borderColor: '#657',
-    borderWidth: 1,
+  radioButtonLabel: {
+    color:'#9500ff',
+    
+    alignItems:'center'
   },
 });
 
 
-export default Videotest2;
-
-
-
-
-
+export default Videotest2; //@const명 수정
