@@ -73,4 +73,9 @@ public class Controller {
         return userRepository.findVideo5();
     }
 
+    @GetMapping("/video6")
+    public List<User> getData9() {
+        return userRepository.findVideo5();
+    }
+
 }

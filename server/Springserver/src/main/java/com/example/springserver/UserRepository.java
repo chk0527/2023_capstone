@@ -24,15 +24,18 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Query("SELECT u from User u where u.link = 'Aqkx40ifYWw' ")
     List<User> findVideo1();
 
-    @Query("SELECT u from User u where u.link = 'Aqkx40ifYWw' ")
+    @Query("SELECT u from User u where u.link = 'gcgwwFPqrSA?list=PLgo6yDyOB1JWJqQFhLvvald4J_fb-wG4y' ")
     List<User> findVideo2();
 
-    @Query("SELECT u from User u where u.link = 'PbYMhyhaKO0' ")
+    @Query("SELECT u from User u where u.link = 'KPjm471GmHA' ")
     List<User> findVideo3();
 
-    @Query("SELECT u from User u where u.link = 'k5R5phf2ajA' ")
+    @Query("SELECT u from User u where u.link = 'BhejYMbF1TU' ")
     List<User> findVideo4();
 
-    @Query("SELECT u from User u where u.link = 'JhGxtcG6IzQ' ")
+    @Query("SELECT u from User u where u.link = 'yyiox2536C0' ")
     List<User> findVideo5();
+
+    @Query("SELECT u from User u where u.link = 'AZsFteT_nGI' ")
+    List<User> findVideo6();
 }
