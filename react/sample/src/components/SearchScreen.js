@@ -135,7 +135,9 @@ const SearchScreen = ({ route, navigation }) => {
               status={selectedOption === option.value ? 'checked' : 'unchecked'}
               onPress={() => handleRadioButtonChange(option, setSelectedOption)}
               color="#fff"
-              backgroundColor="#4B0082"
+              backgroundColor="#657"
+              width={20}
+              height={20}
             />
             <Text style={styles.radioButtonLabel}>{option.label}</Text>
           </View>
@@ -209,6 +211,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     margin: 5,
+    justifyContent: 'center', 
+    alignItems: 'center', 
   },
   radioButtonItem: {
     flexDirection: 'row',

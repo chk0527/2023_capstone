@@ -178,8 +178,8 @@ const Videotest4 = ({route, navigation}) => { //@1-const명 수정
               onPress={() => handleRadioButtonChange(option, setSelectedOption)}
               color="#fff"
               backgroundColor="#657"
-              width={20}
-              height={20}
+              width={35}
+              height={35}
             />
             <Text style={styles.radioButtonLabel}>{option.label}</Text>
           </View>
