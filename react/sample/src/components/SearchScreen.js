@@ -94,7 +94,7 @@ const SearchScreen = ({ route, navigation }) => {
       case 6:
         return 'taiwan'
       case 7:
-        return 'inception'
+        return '인셉션'     
     }
   }
 

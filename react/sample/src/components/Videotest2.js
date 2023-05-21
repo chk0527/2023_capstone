@@ -7,6 +7,7 @@ import { SearchBar } from '@rneui/themed';
 import {RadioButton} from "react-native-paper";
 
 
+
 const Videotest2 = ({route, navigation}) => { //@1-const명 수정
   const [playing, setPlaying] = useState(false); // 비디오 재생 
   const [dataList, setDataList] = useState([]); // DB에서 받아온 데이터 리스트
@@ -16,6 +17,7 @@ const Videotest2 = ({route, navigation}) => { //@1-const명 수정
   const [objects, setObjects] = useState([]); // 전체 리스트 표시를 위한 DB에서 받아온 물체 분류
   const [actions, setActions] = useState([]); // 전체 리스트 표시를 위한 DB에서 받아온 행동 분류
   const [searchOption, setSearchOption] = useState('both');//검색 분류
+  
   
 
 
