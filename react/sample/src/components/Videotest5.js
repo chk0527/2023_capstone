@@ -42,9 +42,9 @@ const Videotest5 = ({route, navigation}) => { //@1-const명 수정
   const playerRef = useRef();
 
   const [searchOptions,setSearchOptions] = useState([
-    { label: '← 물체,행동 검색', value: 'both' },
-    { label: '← 물체 검색', value: 'object' },
-    { label: '← 행동 검색', value: 'action' },
+    { label: ' 물체,행동 검색 ', value: 'both' },
+    { label: ' 물체 검색 ', value: 'object' },
+    { label: ' 행동 검색 ', value: 'action' },
   ]);
   const [selectedOption, setSelectedOption] = useState(searchOptions.length > 0 ? searchOptions[0].value : "both");
 
@@ -177,6 +177,9 @@ const Videotest5 = ({route, navigation}) => { //@1-const명 수정
               status={selectedOption === option.value ? 'checked' : 'unchecked'}
               onPress={() => handleRadioButtonChange(option, setSelectedOption)}
               color="#fff"
+              backgroundColor="#657"
+              width={20}
+              height={20}
             />
             <Text style={styles.radioButtonLabel}>{option.label}</Text>
           </View>
@@ -243,6 +246,8 @@ const styles = StyleSheet.create({
     backgroundColor:'#000',
     flexDirection: 'row',
     flexWrap: 'wrap',
+    justifyContent: 'center', 
+    alignItems: 'center', 
   },
   radioButtonItem: {
     flexDirection: 'row',
