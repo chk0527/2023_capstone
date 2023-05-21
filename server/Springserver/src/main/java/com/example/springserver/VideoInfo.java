@@ -10,6 +10,8 @@ public class VideoInfo {
     private int id;
     private String title;
     private String description;
+    private String object;
+    private String ava_label;
     private String link;
     private String image;
 
@@ -29,7 +31,8 @@ public class VideoInfo {
     public void setImage(String image) {
         this.image = image;
     }
-
+    public void setObject(String object) { this.object = object; }
+    public void setAva_label(String ava_label) { this.ava_label = ava_label; }
 
     public int getId() {
         return id;
@@ -44,5 +47,6 @@ public class VideoInfo {
     public String getImage() {
         return image;
     }
-
+    public String getObject() { return object; }
+    public String getAva_label() { return ava_label; }
 }

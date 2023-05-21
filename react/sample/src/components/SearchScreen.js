@@ -30,48 +30,45 @@ const SearchScreen = ({ route, navigation }) => {
       setObjects(uniqueObjects);
       const uniqueActions = Array.from(new Set(response.data.map(item => item.ava_label)));
       setActions(uniqueActions);
-
     } catch (error) {
       console.log(error);
     }
   };
 
-  const [searchOptions,setSearchOptions] = useState([
-    { label: '← 이름 검색', value: 'title' },
-    { label: '← 물체 검색', value: 'object' },
-    { label: '← 행동 검색', value: 'action' },
+  const [searchOptions, setSearchOptions] = useState([
+    { label: ' 이름 검색 ', value: 'title' },
+    { label: ' 물체 검색 ', value: 'object' },
+    { label: ' 행동 검색 ', value: 'action' },
   ]);
-
-
   const [selectedOption, setSelectedOption] = useState(searchOptions.length > 0 ? searchOptions[0].value : "title");
 
   const handleRadioButtonChange = (item, setSelectedOption) => {
     setSelectedOption(item.value);
     setSearchOption(item.value);
     let filtered = dataList;
-if (item.value === 'object') {
-  filtered = dataList.filter((item) => item.object && item.object.toLowerCase().includes(query.toLowerCase()));
-} else if (item.value === 'action') {
-  filtered = dataList.filter((item) => item.ava_label && item.ava_label.toLowerCase().includes(query.toLowerCase()));
-} else {
-  filtered = dataList.filter((item) => item.ava_label && item.ava_label.toLowerCase().includes(query.toLowerCase()));
-}
-
-}
-
-  
+    if (item.value === 'object') {
+      filtered = dataList.filter((item) => item.object && item.object.toLowerCase().includes(query.toLowerCase()));
+    } else if (item.value === 'action') {
+      filtered = dataList.filter((item) => item.ava_label && item.ava_label.toLowerCase().includes(query.toLowerCase()));
+    } else {
+      filtered = dataList.filter((item) => item.title && item.title.toLowerCase().includes(query.toLowerCase()));
+    }
+  }
 
   const updateSearch = (text) => {
-    const filtered = text && dataList.filter((item) =>
-      item.title.toLowerCase().includes(text.toLowerCase()) // 영상제목 검색
-    );
     setQuery(text);
-    setSearch(text === '' ? dataList : (filtered || dataList));
+    let filtered = dataList;
+    if (searchOption === 'title') {
+      filtered = dataList.filter((item) => item.title.toLowerCase().includes(text.toLowerCase()));
+    } else if (searchOption === 'object') {
+      filtered =  dataList.filter((item) => item.object.toLowerCase().includes(text.toLowerCase()));
+    } else {
+      filtered = dataList.filter((item) => item.ava_label.toLowerCase().includes(text.toLowerCase()));
+    }
+    setSearch(text === '' ? dataList : filtered);
   };
 
-  
-
-  const flexArr = [0.7, 0.5, 1.5,1];
+  const flexArr = [0.7, 0.5, 1.5, 1];
 
   const renderHeader = () => (
     <Row
@@ -98,8 +95,6 @@ if (item.value === 'object') {
         return 'taiwan'
       case 7:
         return 'inception'
-
-        
     }
   }
 
@@ -115,7 +110,8 @@ if (item.value === 'object') {
           <Image source={{ uri: rowData.image }} style={{ width: 100, height: 150 }} />
         </TouchableWithoutFeedback>,
         rowData.title,
-        rowData.description]}
+        rowData.description,
+      ]}
       style={styles.cell}
       textStyle={styles.text}
       flexArr={flexArr}
@@ -131,17 +127,20 @@ if (item.value === 'object') {
         value={query}
         onChange={(event) => updateSearch(event.nativeEvent.text)}
       />
-      {searchOptions.map((option) => (
+      <View style={styles.radioButtonContainer}>
+        {searchOptions.map((option) => (
           <View key={option.value} style={styles.radioButtonItem}>
             <RadioButton
               value={option.value}
               status={selectedOption === option.value ? 'checked' : 'unchecked'}
               onPress={() => handleRadioButtonChange(option, setSelectedOption)}
               color="#fff"
+              backgroundColor="#4B0082"
             />
             <Text style={styles.radioButtonLabel}>{option.label}</Text>
           </View>
         ))}
+      </View>
       <FlatList
         data={search} // 렌더링할 데이터
         ListHeaderComponent={renderHeader}
@@ -206,18 +205,19 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   radioButtonContainer: {
-    backgroundColor:'#000',
+    backgroundColor: '#000',
     flexDirection: 'row',
     flexWrap: 'wrap',
+    margin: 5,
   },
   radioButtonItem: {
     flexDirection: 'row',
     alignItems: 'center',
   },
   radioButtonLabel: {
-    color:'#9500ff',
-    
-    alignItems:'center'
+    color: '#E6E6FA',
+
+    alignItems: 'center'
   },
 });
 

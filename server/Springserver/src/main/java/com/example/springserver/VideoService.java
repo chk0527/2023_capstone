@@ -17,5 +17,4 @@ public class VideoService {
     public List<VideoInfo> getAllVideoData() {
         return videoRepository.findVideoInfoData();
     }
-
 }
