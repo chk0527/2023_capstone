@@ -68,7 +68,7 @@ const SearchScreen = ({ route, navigation }) => {
     setSearch(text === '' ? dataList : filtered);
   };
 
-  const flexArr = [0.7, 0.5, 1.5, 1];
+  const flexArr = [1.0, 0.5, 1.5];
 
   const renderHeader = () => (
     <Row
@@ -143,6 +143,7 @@ const SearchScreen = ({ route, navigation }) => {
           </View>
         ))}
       </View>
+      <View style={styles.flat}>
       <FlatList
         data={search} // 렌더링할 데이터
         ListHeaderComponent={renderHeader}
@@ -152,6 +153,7 @@ const SearchScreen = ({ route, navigation }) => {
           <View style={styles.separator} />
         )}
       />
+      </View>
     </View>
   )
 }
@@ -160,10 +162,11 @@ const styles = StyleSheet.create({
   main: {
     flex: 1,
     backgroundColor: 'black',
+    
   },
   head: {
     height: 50,
-    backgroundColor: '#333333'
+    backgroundColor: '#444'
 
   },
   row: {
@@ -179,8 +182,10 @@ const styles = StyleSheet.create({
   },
   cell: {
     flex: 1,
-    borderWidth: 0.5,
-    borderColor: '#c8e1ff',
+    borderColor: '#555',
+  },
+  flat:{
+    backgroundColor:'#555',
   },
   cell_id: {
     flex: 0.5,
@@ -219,9 +224,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   radioButtonLabel: {
-    color: '#E6E6FA',
-
+    color:'#fff',
+    fontWeight:'bold',
     alignItems: 'center'
+  },
+  separator: { //flatlist구분선
+    height: 2,
+    backgroundColor: '#ccc',
   },
 });
 

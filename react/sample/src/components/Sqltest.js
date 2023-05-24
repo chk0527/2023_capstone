@@ -5,13 +5,13 @@ import PropTypes from 'deprecated-react-native-prop-types';
 
 import axios from 'axios';
 
-import trip1 from './../../images/trip1.jpeg'
-import trip2 from './../../images/trip2.jpeg'
-import trip3 from './../../images/trip3.png'
 import casino from './../../images/casino.jpeg'
 import lawyer from './../../images/lawyer.jpeg'
 import cctva from './../../images/cctv.jpeg'
 import inception from './../../images/inception.jpeg'
+import japan from './../../images/japan.png'
+import taiwan from './../../images/taiwan.png'
+import austria from './../../images/austria.png'
 
 const Sqltest = ({navigation}) => {
   
@@ -25,7 +25,7 @@ const Sqltest = ({navigation}) => {
 
   const fetchData = async () => { // DB불러오기
     try {
-      const response = await axios.get('http://localhost:8080/alldata'); // localhost가 아닌 서버를 실행할 pc의 ip주소
+      const response = await axios.get('http://3.86.244.172:8080/alldata'); // localhost가 아닌 서버를 실행할 pc의 ip주소
       setDataList(response.data);
     } catch (error) {
       console.log(error);
@@ -126,9 +126,9 @@ const Sqltest = ({navigation}) => {
       <Text style={styles.fonttest}>Trip</Text>
       <Carousel
         data={[
-          { id: 2, image: trip1, onPress: handlePressVideo2 },
-          { id: 4, image: trip2, onPress: handlePressVideo4 },
-          { id: 6, image: trip3, onPress: handlePressVideo6 }
+          { id: 2, image: austria, onPress: handlePressVideo2 },
+          { id: 4, image: japan, onPress: handlePressVideo4 },
+          { id: 6, image: taiwan, onPress: handlePressVideo6 }
         ]}
         renderItem={renderItem}
         sliderWidth={400}

@@ -254,8 +254,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   radioButtonLabel: {
-    color:'#9500ff',
-    
+    color:'#fff',
+    fontWeight:'bold',
     alignItems:'center'
   },
 });
