@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Table, TableWrapper, Row, Col, Cell } from "react-native-table-component";
 import { SearchBar } from '@rneui/themed';
 import { RadioButton } from "react-native-paper";
+import { ViewPropTypes } from "deprecated-react-native-prop-types";
 import { color } from "@rneui/base";
 
 const SearchScreen = ({ route, navigation }) => {
