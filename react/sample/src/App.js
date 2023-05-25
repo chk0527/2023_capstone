@@ -7,13 +7,13 @@ import { useNavigation } from "@react-navigation/native";
 import Sqltest from "./components/Sqltest";
 import SearchScreen from "./components/SearchScreen";
 
-import Videotest from "/Users/sangsang1/Documents/GitHub/2023_capstone/react/sample/src/components/Videotest.js";
-import Videotest2 from "/Users/sangsang1/Documents/GitHub/2023_capstone/react/sample/src/components/Videotest2.js";
-import Videotest3 from "/Users/sangsang1/Documents/GitHub/2023_capstone/react/sample/src/components/Videotest3.js";
-import Videotest4 from "/Users/sangsang1/Documents/GitHub/2023_capstone/react/sample/src/components/Videotest4.js";
-import Videotest5 from "/Users/sangsang1/Documents/GitHub/2023_capstone/react/sample/src/components/Videotest5.js";
-import Videotest6 from "/Users/sangsang1/Documents/GitHub/2023_capstone/react/sample/src/components/Videotest6.js";
-import Videotest7 from "/Users/sangsang1/Documents/GitHub/2023_capstone/react/sample/src/components/Videotest7.js";
+import Videotest from "./components/Videotest";
+import Videotest2 from "./components/Videotest2";
+import Videotest3 from "./components/Videotest3";
+import Videotest4 from "./components/Videotest4";
+import Videotest5 from "./components/Videotest5";
+import Videotest6 from "./components/Videotest6";
+import Videotest7 from "./components/Videotest7";
 
 
 import Tabs from "./components/Navigation/Tabs";
