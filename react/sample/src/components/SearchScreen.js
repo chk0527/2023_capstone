@@ -24,7 +24,7 @@ const SearchScreen = ({ route, navigation }) => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(`http://localhost:8080/video_info`);
+      const response = await axios.get(`http://3.86.244.172:8080/video_info`);
       setDataList(response.data);
       setSearch(response.data);
       const uniqueObjects = Array.from(new Set(response.data.map(item => item.object)));
@@ -163,7 +163,6 @@ const styles = StyleSheet.create({
   main: {
     flex: 1,
     backgroundColor: 'black',
-    
   },
   head: {
     height: 50,

@@ -25,7 +25,7 @@ const Sqltest = ({navigation}) => {
 
   const fetchData = async () => { // DB불러오기
     try {
-      const response = await axios.get('http://localhost:8080/alldata'); // localhost가 아닌 서버를 실행할 pc의 ip주소
+      const response = await axios.get('http://3.86.244.172:8080/alldata'); // localhost가 아닌 서버를 실행할 pc의 ip주소
       setDataList(response.data);
     } catch (error) {
       console.log(error);
