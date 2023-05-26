@@ -4,7 +4,6 @@ import axios from 'axios';
 import { Table, TableWrapper, Row, Col, Cell } from "react-native-table-component";
 import { SearchBar } from '@rneui/themed';
 import { RadioButton } from "react-native-paper";
-import { ViewPropTypes } from "deprecated-react-native-prop-types";
 import { color } from "@rneui/base";
 
 const SearchScreen = ({ route, navigation }) => {
@@ -24,7 +23,7 @@ const SearchScreen = ({ route, navigation }) => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(`http://3.86.244.172:8080/video_info`);
+      const response = await axios.get(`http://localhost:8080/video_info`);
       setDataList(response.data);
       setSearch(response.data);
       const uniqueObjects = Array.from(new Set(response.data.map(item => item.object)));
@@ -69,7 +68,7 @@ const SearchScreen = ({ route, navigation }) => {
     setSearch(text === '' ? dataList : filtered);
   };
 
-  const flexArr = [1.0, 0.5, 1.5];
+  const flexArr = [0.7, 0.5, 1.5, 1];
 
   const renderHeader = () => (
     <Row
@@ -144,8 +143,8 @@ const SearchScreen = ({ route, navigation }) => {
           </View>
         ))}
       </View>
-      <View style={styles.flat}>
       <FlatList
+        style={styles.flat}
         data={search} // 렌더링할 데이터
         ListHeaderComponent={renderHeader}
         renderItem={({ item }) => renderRow(item)} // 렌더링할 아이템
@@ -154,7 +153,6 @@ const SearchScreen = ({ route, navigation }) => {
           <View style={styles.separator} />
         )}
       />
-      </View>
     </View>
   )
 }
@@ -224,7 +222,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   radioButtonLabel: {
-    color:'#fff',
+    color: '#fff',
     fontWeight:'bold',
     alignItems: 'center'
   },
