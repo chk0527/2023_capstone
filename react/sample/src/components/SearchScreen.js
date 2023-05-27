@@ -68,7 +68,7 @@ const SearchScreen = ({ route, navigation }) => {
     setSearch(text === '' ? dataList : filtered);
   };
 
-  const flexArr = [0.7, 0.5, 1.5, 1];
+  const flexArr = [0.7, 0.8, 1.4];
 
   const renderHeader = () => (
     <Row
@@ -79,7 +79,7 @@ const SearchScreen = ({ route, navigation }) => {
     />
   );
 
-  function navigateVideo(id) {
+  function navigateVideo(id) { //@id추가
     switch (id) {
       case 1:
         return '카지노'
@@ -94,7 +94,16 @@ const SearchScreen = ({ route, navigation }) => {
       case 6:
         return 'taiwan'
       case 7:
-        return '인셉션'     
+        return '인셉션'
+      case 8:
+        return '나우유씨미'          
+      case 9:
+        return '분노의질주'          
+      case 10:
+        return '동물의왕국'              
+      case 11:
+        return '말리와나'            
+        
     }
   }
 
@@ -110,7 +119,7 @@ const SearchScreen = ({ route, navigation }) => {
           <Image source={{ uri: rowData.image }} style={{ width: 100, height: 150 }} />
         </TouchableWithoutFeedback>,
         rowData.title,
-        rowData.description,
+        <Text style={styles.textdes}>{rowData.description}</Text>,
       ]}
       style={styles.cell}
       textStyle={styles.text}
@@ -174,8 +183,13 @@ const styles = StyleSheet.create({
   },
   text: {
     color: '#ffffff',
-    fontSize: 15,
+    fontSize: 16,
     fontWeight: 'bold',
+    textAlign: 'center'
+  },
+  textdes: {
+    color: '#ffffff',
+    fontSize: 13,
     textAlign: 'center'
   },
   cell: {

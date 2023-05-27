@@ -22,8 +22,10 @@ import dogcat from './../../images/dogcat.jpeg'
 const Sqltest = ({navigation}) => {
   
   const [dataList, setDataList] = useState([]);
-  const [activeIndex, setActiveIndex] = useState(0); // 화면 스크롤 위치 표시
+  const [activeIndex, setActiveIndex] = useState(0); // @화면 스크롤 위치 표시
   const [activeIndex2, setActiveIndex2] = useState(0);
+  const [activeIndex3, setActiveIndex3] = useState(0);
+  const [activeIndex4, setActiveIndex4] = useState(0);
 
   useEffect(() => {
     fetchData();
@@ -119,7 +121,7 @@ const Sqltest = ({navigation}) => {
   const renderPage3 = () => (//cctv
     <View style={styles.pageIndicator}>
       {[...Array(1)].map((_, i) => (
-        <View key={i} style={[styles.dot, i === activeIndex2 && styles.activeDot]} /> 
+        <View key={i} style={[styles.dot, i === activeIndex3 && styles.activeDot]} /> 
       ))}
     </View>
   );
@@ -127,13 +129,13 @@ const Sqltest = ({navigation}) => {
   const renderPage4 = () => (//동물
     <View style={styles.pageIndicator}>
       {[...Array(2)].map((_, i) => (
-        <View key={i} style={[styles.dot, i === activeIndex2 && styles.activeDot]} /> 
+        <View key={i} style={[styles.dot, i === activeIndex4 && styles.activeDot]} /> 
       ))}
     </View>
   );
   //SafeAreaView는 상단바 색 체크
 
-  return (    //@스크롤 뷰 체크
+  return (    //@스크롤 뷰 체크, 엑티브인덱스 수정
     <ScrollView style={styles.top}>
     <View style={styles.main}>
     <SafeAreaView 
@@ -182,24 +184,6 @@ const Sqltest = ({navigation}) => {
         onSnapToItem={(index) => setActiveIndex2(index)}
       />
       {renderPage2()}
-      <Text style={styles.fonttest}>Accident&Incident</Text>
-      <Carousel
-        data={[
-          { id: 3, image: cctva, onPress: handlePressVideo3 }
-        ]}
-        renderItem={renderItem}
-        sliderWidth={400}
-        itemWidth={200}
-        loop={true}
-
-        // autoplay={false}
-        //autoplayDelay={500}
-        //autoplayInterval={2000}
-        gap={16}
-        offset={36}
-        onSnapToItem={(index) => setActiveIndex2(index)}
-      />
-      {renderPage3()}
       <Text style={styles.fonttest}>Animal</Text>
       <Carousel
         data={[
@@ -216,9 +200,27 @@ const Sqltest = ({navigation}) => {
         //autoplayInterval={2000}
         gap={16}
         offset={36}
-        onSnapToItem={(index) => setActiveIndex2(index)}
+        onSnapToItem={(index) => setActiveIndex4(index)}
       />
       {renderPage4()}
+      <Text style={styles.fonttest}>Accident&Incident</Text>
+      <Carousel
+        data={[
+          { id: 3, image: cctva, onPress: handlePressVideo3 }
+        ]}
+        renderItem={renderItem}
+        sliderWidth={400}
+        itemWidth={200}
+        loop={true}
+
+        // autoplay={false}
+        //autoplayDelay={500}
+        //autoplayInterval={2000}
+        gap={16}
+        offset={36}
+        onSnapToItem={(index) => setActiveIndex3(index)}
+      />
+      {renderPage3()}
     </View>
     </ScrollView>
     

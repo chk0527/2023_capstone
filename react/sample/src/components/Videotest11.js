@@ -126,7 +126,7 @@ const Videotest11 = ({route, navigation}) => { //@1-const명 수정
 
   const renderRow = (rowData,index) => (
     <Row
-      data={[rowData.id.toString()-3255, rowData.timestamp, rowData.object.toString(), rowData.ava_label]} //@id순번 빼주기
+      data={[rowData.id.toString()-7387, rowData.timestamp, rowData.object.toString(), rowData.ava_label]} //@id순번 빼주기
       style={styles.cell} 
       textStyle={styles.text}
       flexArr={flexArr}
