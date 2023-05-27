@@ -101,7 +101,7 @@ public class Controller {
     @GetMapping("/video11")
     public List<User> getData14() {
         return userRepository.findVideo11();
-    }
+    } //말리와나
 
 
 }
