@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, TouchableWithoutFeedback, Image, ScrollView } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { ViewPropTypes } from 'deprecated-react-native-prop-types';
 
 import axios from 'axios';
@@ -12,6 +13,11 @@ import inception from './../../images/inception.jpeg'
 import japan from './../../images/japan.jpeg'
 import taiwan from './../../images/taiwan.jpeg'
 import austria from './../../images/austria.jpeg'
+import nysm from './../../images/nysm.jpeg'
+import race from './../../images/race.jpeg'
+import marley from './../../images/marley.jpeg'
+import dogcat from './../../images/dogcat.jpeg'
+
 
 const Sqltest = ({navigation}) => {
   
@@ -25,7 +31,7 @@ const Sqltest = ({navigation}) => {
 
   const fetchData = async () => { // DB불러오기
     try {
-      const response = await axios.get('http://3.86.244.172:8080/alldata'); // localhost가 아닌 서버를 실행할 pc의 ip주소
+      const response = await axios.get('http://localhost:8080/alldata'); // localhost가 아닌 서버를 실행할 pc의 ip주소
       setDataList(response.data);
     } catch (error) {
       console.log(error);
@@ -39,6 +45,10 @@ const Sqltest = ({navigation}) => {
   const filteredLinks5 = dataList.filter((item) => item.id === 1481).map((item) => item.link); //lawyer
   const filteredLinks6 = dataList.filter((item) => item.id === 2880).map((item) => item.link); //tai
   const filteredLinks7 = dataList.filter((item) => item.id === 3256).map((item) => item.link); //inception
+  const filteredLinks8 = dataList.filter((item) => item.id === 4604).map((item) => item.link); //nowyouseeme
+  const filteredLinks9 = dataList.filter((item) => item.id === 5217).map((item) => item.link); //분노의질주
+  const filteredLinks10 = dataList.filter((item) => item.id === 6704).map((item) => item.link); //동물의왕국
+  const filteredLinks11 = dataList.filter((item) => item.id === 7388).map((item) => item.link); //말리와나-동물
 
   const handlePressVideo1 = () => { // 클릭 하였을 때의 네비게이션 이벤트 
     navigation.push('카지노', { id1: filteredLinks }); //@네비게이션이름 수정
@@ -67,6 +77,22 @@ const Sqltest = ({navigation}) => {
     navigation.push('인셉션', { id7: filteredLinks7 });
   };
 
+  const handlePressVideo8 = () => {
+    navigation.push('나우유씨미', { id7: filteredLinks8 });
+  };
+
+  const handlePressVideo9 = () => {
+    navigation.push('분노의질주', { id7: filteredLinks9 });
+  };
+
+  const handlePressVideo10 = () => {
+    navigation.push('동물의왕국', { id7: filteredLinks10 });
+  };
+
+  const handlePressVideo11 = () => {
+    navigation.push('말리와나', { id7: filteredLinks11 });
+  };
+
   const renderItem = ({ item }) => ( // 클릭 가능한 이미지 생성
     <TouchableWithoutFeedback onPress={item.onPress}>
       <View style={styles.imageContainer}>
@@ -75,14 +101,14 @@ const Sqltest = ({navigation}) => {
     </TouchableWithoutFeedback>
   );
 
-  const renderPage = () => ( // 스크롤 표시
-    <View style={styles.pageIndicator}>
-      {[...Array(3)].map((_, i) => (
+  const renderPage = () => ( // 스크롤 표시 @스크롤 갯수 변경 ,영화
+    <View style={styles.pageIndicator}> 
+      {[...Array(5)].map((_, i) => (
         <View key={i} style={[styles.dot, i === activeIndex && styles.activeDot]} />
       ))}
     </View>
   );
-  const renderPage2 = () => (
+  const renderPage2 = () => (//여행지
     <View style={styles.pageIndicator}>
       {[...Array(3)].map((_, i) => (
         <View key={i} style={[styles.dot, i === activeIndex2 && styles.activeDot]} />
@@ -90,24 +116,37 @@ const Sqltest = ({navigation}) => {
     </View>
   );
 
-  const renderPage3 = () => (
+  const renderPage3 = () => (//cctv
     <View style={styles.pageIndicator}>
       {[...Array(1)].map((_, i) => (
-        <View key={i} style={[styles.dot, i === activeIndex2 && styles.activeDot]} />
+        <View key={i} style={[styles.dot, i === activeIndex2 && styles.activeDot]} /> 
       ))}
     </View>
   );
-  
 
-  return (
-    <ScrollView>
+  const renderPage4 = () => (//동물
+    <View style={styles.pageIndicator}>
+      {[...Array(2)].map((_, i) => (
+        <View key={i} style={[styles.dot, i === activeIndex2 && styles.activeDot]} /> 
+      ))}
+    </View>
+  );
+  //SafeAreaView는 상단바 색 체크
+
+  return (    //@스크롤 뷰 체크
+    <ScrollView style={styles.top}>
     <View style={styles.main}>
+    <SafeAreaView 
+      edges={['top']}
+      style={{flex:0,backgroundColor:'white'}}/> 
       <Text style={styles.fonttest}>Movie</Text>
       <Carousel // 캐러셀 사용, 스크롤 뷰 구현
         data={[
           { id: 1, image: casino, onPress: handlePressVideo1 },
           { id: 5, image: lawyer, onPress: handlePressVideo5 },
-          { id: 7, image: inception, onPress:handlePressVideo7}
+          { id: 7, image: inception, onPress:handlePressVideo7},
+          { id: 8, image: nysm, onPress:handlePressVideo8},
+          { id: 9, image: race, onPress:handlePressVideo9}
         ]}
         renderItem={renderItem}
         sliderWidth={600}
@@ -161,8 +200,28 @@ const Sqltest = ({navigation}) => {
         onSnapToItem={(index) => setActiveIndex2(index)}
       />
       {renderPage3()}
+      <Text style={styles.fonttest}>Animal</Text>
+      <Carousel
+        data={[
+          { id: 10, image: dogcat, onPress: handlePressVideo10 },
+          { id: 11, image: marley, onPress: handlePressVideo11 }
+        ]}
+        renderItem={renderItem}
+        sliderWidth={400}
+        itemWidth={200}
+        loop={true}
+
+        // autoplay={false}
+        //autoplayDelay={500}
+        //autoplayInterval={2000}
+        gap={16}
+        offset={36}
+        onSnapToItem={(index) => setActiveIndex2(index)}
+      />
+      {renderPage4()}
     </View>
     </ScrollView>
+    
   );
 };
 
@@ -171,6 +230,10 @@ const styles = StyleSheet.create({
     flex: 0,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#000'
+  },
+  top:{
+    backgroundColor:'#000'
   },
   imageContainer: {
     padding: 10,
@@ -203,6 +266,9 @@ const styles = StyleSheet.create({
     color: 'white',
     textAlign: 'left',
     alignSelf: 'flex-start',
+  },
+  safe:{
+    backgroundColor:'#000'
   }
 });
 
