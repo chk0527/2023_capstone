@@ -68,7 +68,7 @@ const SearchScreen = ({ route, navigation }) => {
     setSearch(text === '' ? dataList : filtered);
   };
 
-  const flexArr = [0.7, 0.5, 1.5, 1];
+  const flexArr = [0.7, 0.8, 1.4];
 
   const renderHeader = () => (
     <Row
@@ -79,7 +79,7 @@ const SearchScreen = ({ route, navigation }) => {
     />
   );
 
-  function navigateVideo(id) {
+  function navigateVideo(id) { //@id추가
     switch (id) {
       case 1:
         return '카지노'
@@ -94,7 +94,16 @@ const SearchScreen = ({ route, navigation }) => {
       case 6:
         return 'taiwan'
       case 7:
-        return 'inception'
+        return '인셉션'
+      case 8:
+        return '나우유씨미'          
+      case 9:
+        return '분노의질주'          
+      case 10:
+        return '동물의왕국'              
+      case 11:
+        return '말리와나'            
+        
     }
   }
 
@@ -110,7 +119,7 @@ const SearchScreen = ({ route, navigation }) => {
           <Image source={{ uri: rowData.image }} style={{ width: 100, height: 150 }} />
         </TouchableWithoutFeedback>,
         rowData.title,
-        rowData.description,
+        <Text style={styles.textdes}>{rowData.description}</Text>,
       ]}
       style={styles.cell}
       textStyle={styles.text}
@@ -135,13 +144,16 @@ const SearchScreen = ({ route, navigation }) => {
               status={selectedOption === option.value ? 'checked' : 'unchecked'}
               onPress={() => handleRadioButtonChange(option, setSelectedOption)}
               color="#fff"
-              backgroundColor="#4B0082"
+              backgroundColor="#657"
+              width={35}
+              height={35}
             />
             <Text style={styles.radioButtonLabel}>{option.label}</Text>
           </View>
         ))}
       </View>
       <FlatList
+        style={styles.flat}
         data={search} // 렌더링할 데이터
         ListHeaderComponent={renderHeader}
         renderItem={({ item }) => renderRow(item)} // 렌더링할 아이템
@@ -161,7 +173,7 @@ const styles = StyleSheet.create({
   },
   head: {
     height: 50,
-    backgroundColor: '#333333'
+    backgroundColor: '#444'
 
   },
   row: {
@@ -171,14 +183,21 @@ const styles = StyleSheet.create({
   },
   text: {
     color: '#ffffff',
-    fontSize: 15,
+    fontSize: 16,
     fontWeight: 'bold',
+    textAlign: 'center'
+  },
+  textdes: {
+    color: '#ffffff',
+    fontSize: 13,
     textAlign: 'center'
   },
   cell: {
     flex: 1,
-    borderWidth: 0.5,
-    borderColor: '#c8e1ff',
+    borderColor: '#555',
+  },
+  flat:{
+    backgroundColor:'#555',
   },
   cell_id: {
     flex: 0.5,
@@ -209,15 +228,21 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     margin: 5,
+    justifyContent: 'center', 
+    alignItems: 'center', 
   },
   radioButtonItem: {
     flexDirection: 'row',
     alignItems: 'center',
   },
   radioButtonLabel: {
-    color: '#E6E6FA',
-
+    color: '#fff',
+    fontWeight:'bold',
     alignItems: 'center'
+  },
+  separator: { //flatlist구분선
+    height: 2,
+    backgroundColor: '#ccc',
   },
 });
 
