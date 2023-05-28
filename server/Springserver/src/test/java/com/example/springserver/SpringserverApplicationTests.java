@@ -1,13 +1,13 @@
 package com.example.springserver;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+//import org.springframework.boot.test.context.SpringBootTest;
 
 //@SpringBootTest
-class SpringserverApplicationTests {
+//class SpringserverApplicationTests {
 
     //@Test
-    void contextLoads() {
-    }
+    //void contextLoads() {
+    //}
 
-}
+//}
