@@ -103,7 +103,8 @@ const SearchScreen = ({ route, navigation }) => {
         return '동물의왕국'              
       case 11:
         return '말리와나'            
-        
+      case 12:
+        return '캐치미이프유캔'
     }
   }
 

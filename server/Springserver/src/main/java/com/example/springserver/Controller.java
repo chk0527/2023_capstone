@@ -1,6 +1,5 @@
 package com.example.springserver;
 
-
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -103,5 +102,8 @@ public class Controller {
         return userRepository.findVideo11();
     } //말리와나
 
-
+    @GetMapping("/video12")
+    public List<User> getData15() {
+        return userRepository.findVideo12();
+    }
 }

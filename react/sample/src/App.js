@@ -18,7 +18,7 @@ import Videotest8 from "./components/Videotest8";
 import Videotest9 from "./components/Videotest9";
 import Videotest10 from "./components/Videotest10";
 import Videotest11 from "./components/Videotest11";
-
+import Videotest12 from "./components/Videotest12";
 
 
 import Tabs from "./components/Navigation/Tabs";
@@ -55,6 +55,7 @@ function HomeStack({navigation}){
            <Stack.Screen name="분노의질주" component={Videotest9} options={{title:'분노의 질주', headerTitleStyle:{fontSize:30, fontWeight:'bold', backgroundColor:'#000'}}}/>
            <Stack.Screen name="동물의왕국" component={Videotest10} options={{title:'동물의 왕국-개&고양이편', headerTitleStyle:{fontSize:30, fontWeight:'bold', backgroundColor:'#000'}}}/>
            <Stack.Screen name="말리와나" component={Videotest11} options={{title:'말리와 나', headerTitleStyle:{fontSize:30, fontWeight:'bold', backgroundColor:'#000'}}}/>
+           <Stack.Screen name="캐치미이프유캔" component={Videotest12} options={{title:'말리와 나', headerTitleStyle:{fontSize:30, fontWeight:'bold', backgroundColor:'#000'}}}/>
        </Stack.Navigator>
     )
 }
@@ -85,6 +86,7 @@ function SearchScreen2({navigation}){
            <Stack.Screen name="분노의질주" component={Videotest9} options={{title:'분노의 질주', headerTitleStyle:{fontSize:30, fontWeight:'bold', backgroundColor:'#000'}}}/>
            <Stack.Screen name="동물의왕국" component={Videotest10} options={{title:'동물의 왕국-개&고양이편', headerTitleStyle:{fontSize:30, fontWeight:'bold', backgroundColor:'#000'}}}/>
            <Stack.Screen name="말리와나" component={Videotest11} options={{title:'말리와 나', headerTitleStyle:{fontSize:30, fontWeight:'bold', backgroundColor:'#000'}}}/>
+           <Stack.Screen name="캐치미이프유캔" component={Videotest11} options={{title:'캐치미 이프 유 캔', headerTitleStyle:{fontSize:30, fontWeight:'bold', backgroundColor:'#000'}}}/>
      </Stack.Navigator>
   )
 }
