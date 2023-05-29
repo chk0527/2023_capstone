@@ -25,7 +25,7 @@ const Videotest7 = ({route, navigation}) => { //@1-const명 수정
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(`http://localhost:8080/video7`); //서버get수정 @서버get수정, 서버 쿼리문 수정
+      const response = await axios.get(`http://3.86.244.172:8080/video7`); //서버get수정 @서버get수정, 서버 쿼리문 수정
       setDataList(response.data);
       setSearch(response.data);
       const uniqueObjects = Array.from(new Set(response.data.map(item => item.object)));
