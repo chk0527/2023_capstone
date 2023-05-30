@@ -101,14 +101,21 @@ public class Controller {
     public List<User> getData14() {
         return userRepository.findVideo11();
     } //말리와나
-
     @GetMapping("/video12")
     public List<User> getData15() {
         return userRepository.findVideo12();
     }
-
     @GetMapping("/video13")
     public List<User> getData16() {
         return userRepository.findVideo13();
+    }
+    @GetMapping("/video14")
+    public List<User> getData17() {
+        return userRepository.findVideo14();
+    }
+
+    @GetMapping("/video15")
+    public List<User> getData18() {
+        return userRepository.findVideo15();
     }
 }

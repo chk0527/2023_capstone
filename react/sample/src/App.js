@@ -20,6 +20,8 @@ import Videotest10 from "./components/Videotest10";
 import Videotest11 from "./components/Videotest11";
 import Videotest12 from "./components/Videotest12";
 import Videotest13 from "./components/Videotest13";
+import Videotest14 from "./components/Videotest14";
+import Videotest15 from "./components/Videotest15";
 
 
 import Tabs from "./components/Navigation/Tabs";
@@ -58,6 +60,8 @@ function HomeStack({navigation}){
            <Stack.Screen name="말리와나" component={Videotest11} options={{title:'말리와 나', headerTitleStyle:{fontSize:30, fontWeight:'bold', backgroundColor:'#000'}}}/>
            <Stack.Screen name="나홀로집에1" component={Videotest12} options={{title:'나 홀로 집에1', headerTitleStyle:{fontSize:30, fontWeight:'bold', backgroundColor:'#000'}}}/>
            <Stack.Screen name="퍼펙트게임" component={Videotest13} options={{title:'퍼펙트게임', headerTitleStyle:{fontSize:30, fontWeight:'bold', backgroundColor:'#000'}}}/>
+           <Stack.Screen name="saipan" component={Videotest14} options={{title:'saipan', headerTitleStyle:{fontSize:30, fontWeight:'bold', backgroundColor:'#000'}}}/>
+           <Stack.Screen name="spain" component={Videotest15} options={{title:'spain', headerTitleStyle:{fontSize:30, fontWeight:'bold', backgroundColor:'#000'}}}/>
        </Stack.Navigator>
     )
 }
@@ -90,6 +94,8 @@ function SearchScreen2({navigation}){
            <Stack.Screen name="말리와나" component={Videotest11} options={{title:'말리와 나', headerTitleStyle:{fontSize:30, fontWeight:'bold', backgroundColor:'#000'}}}/>
            <Stack.Screen name="나홀로집에1" component={Videotest12} options={{title:'나 홀로 집에1', headerTitleStyle:{fontSize:30, fontWeight:'bold', backgroundColor:'#000'}}}/>
            <Stack.Screen name="퍼펙트게임" component={Videotest13} options={{title:'퍼펙트게임', headerTitleStyle:{fontSize:30, fontWeight:'bold', backgroundColor:'#000'}}}/>
+           <Stack.Screen name="saipan" component={Videotest14} options={{title:'saipan', headerTitleStyle:{fontSize:30, fontWeight:'bold', backgroundColor:'#000'}}}/>
+           <Stack.Screen name="spain" component={Videotest15} options={{title:'spain', headerTitleStyle:{fontSize:30, fontWeight:'bold', backgroundColor:'#000'}}}/>
      </Stack.Navigator>
   )
 }
