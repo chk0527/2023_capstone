@@ -19,6 +19,8 @@ import marley from './../../images/marley.jpeg'
 import dogcat from './../../images/dogcat.jpeg'
 import homealone from './../../images/homealone.jpeg'
 import perfectgame from './../../images/perfectgame.jpeg'
+import saipan from './../../images/saipan.jpeg'
+import spain from './../../images/spain.jpeg'
 
 
 const Sqltest = ({navigation}) => {
@@ -55,6 +57,8 @@ const Sqltest = ({navigation}) => {
   const filteredLinks11 = dataList.filter((item) => item.id === 7388).map((item) => item.link); //말리와나-동물
   const filteredLinks12 = dataList.filter((item) => item.id === 8249).map((item) => item.link); //나홀로집에1
   const filteredLinks13 = dataList.filter((item) => item.id === 8647).map((item) => item.link); //퍼펙트게임
+  const filteredLinks14 = dataList.filter((item) => item.id === 9081).map((item) => item.link); //saipan
+  const filteredLinks15 = dataList.filter((item) => item.id === 9346).map((item) => item.link); //spain
 
   const handlePressVideo1 = () => { // 클릭 하였을 때의 네비게이션 이벤트 
     navigation.push('카지노', { id1: filteredLinks }); //@네비게이션이름 수정
@@ -106,6 +110,14 @@ const Sqltest = ({navigation}) => {
   const handlePressVideo13 = () => {
     navigation.push('퍼펙트게임', { id7: filteredLinks13 });
   };
+
+  const handlePressVideo14 = () => {
+    navigation.push('saipan', { id7: filteredLinks14 });
+  };
+
+  const handlePressVideo15 = () => {
+    navigation.push('spain', { id7: filteredLinks15 });
+  };
   
   const renderItem = ({ item }) => ( // 클릭 가능한 이미지 생성
     <TouchableWithoutFeedback onPress={item.onPress}>
@@ -124,7 +136,7 @@ const Sqltest = ({navigation}) => {
   );
   const renderPage2 = () => (//여행지
     <View style={styles.pageIndicator}>
-      {[...Array(3)].map((_, i) => (
+      {[...Array(5)].map((_, i) => (
         <View key={i} style={[styles.dot, i === activeIndex2 && styles.activeDot]} />
       ))}
     </View>
@@ -183,7 +195,9 @@ const Sqltest = ({navigation}) => {
         data={[
           { id: 2, image: austria, onPress: handlePressVideo2 },
           { id: 4, image: japan, onPress: handlePressVideo4 },
-          { id: 6, image: taiwan, onPress: handlePressVideo6 }
+          { id: 6, image: taiwan, onPress: handlePressVideo6 },
+          { id: 14, image: saipan, onPress: handlePressVideo14 },
+          { id: 15, image: spain, onPress: handlePressVideo15 },
         ]}
         renderItem={renderItem}
         sliderWidth={400}
