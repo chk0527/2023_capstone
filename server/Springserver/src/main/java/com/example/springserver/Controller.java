@@ -106,4 +106,9 @@ public class Controller {
     public List<User> getData15() {
         return userRepository.findVideo12();
     }
+
+    @GetMapping("/video13")
+    public List<User> getData16() {
+        return userRepository.findVideo13();
+    }
 }

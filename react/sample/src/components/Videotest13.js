@@ -7,7 +7,7 @@ import { SearchBar } from '@rneui/themed';
 import {RadioButton} from "react-native-paper";
 
 
-const Videotest12 = ({route, navigation}) => { //@1-const명 수정
+const Videotest13 = ({route, navigation}) => { //@1-const명 수정
   const [playing, setPlaying] = useState(false); // 비디오 재생 
   const [dataList, setDataList] = useState([]); // DB에서 받아온 데이터 리스트
   const [query, setQuery] = useState(''); // 검색창 쿼리문 
@@ -25,7 +25,7 @@ const Videotest12 = ({route, navigation}) => { //@1-const명 수정
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(`http://3.86.244.172:8080/video12`); //서버get수정 @서버get수정, 서버 쿼리문 수정
+      const response = await axios.get(`http://3.86.244.172:8080/video13`); //서버get수정 @서버get수정, 서버 쿼리문 수정
       setDataList(response.data);
       setSearch(response.data);
       const uniqueObjects = Array.from(new Set(response.data.map(item => item.object)));
@@ -126,7 +126,7 @@ const Videotest12 = ({route, navigation}) => { //@1-const명 수정
 
   const renderRow = (rowData,index) => (
     <Row
-      data={[rowData.id.toString()-8248, rowData.timestamp, rowData.object.toString(), rowData.ava_label]} //@id순번 빼주기
+      data={[rowData.id.toString()-8646, rowData.timestamp, rowData.object.toString(), rowData.ava_label]} //@id순번 빼주기
       style={styles.cell} 
       textStyle={styles.text}
       flexArr={flexArr}
@@ -165,7 +165,7 @@ const Videotest12 = ({route, navigation}) => { //@1-const명 수정
       <YoutubePlayer
         height={222}
         play={playing}
-        videoId={"5kKMnDiG6Kc"} //@id수정
+        videoId={"41sQmLL8qRY"} //@id수정
         onChangeState={onStateChange}
         ref={playerRef}
       />
@@ -261,4 +261,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default Videotest12; //@const명 수정
+export default Videotest13; //@const명 수정

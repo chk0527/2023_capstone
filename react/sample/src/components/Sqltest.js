@@ -17,7 +17,8 @@ import nysm from './../../images/nysm.jpeg'
 import race from './../../images/race.jpeg'
 import marley from './../../images/marley.jpeg'
 import dogcat from './../../images/dogcat.jpeg'
-import catchme from './../../images/catchme.jpeg'
+import homealone from './../../images/homealone.jpeg'
+import perfectgame from './../../images/perfectgame.jpeg'
 
 
 const Sqltest = ({navigation}) => {
@@ -52,7 +53,8 @@ const Sqltest = ({navigation}) => {
   const filteredLinks9 = dataList.filter((item) => item.id === 5217).map((item) => item.link); //분노의질주
   const filteredLinks10 = dataList.filter((item) => item.id === 6704).map((item) => item.link); //동물의왕국
   const filteredLinks11 = dataList.filter((item) => item.id === 7388).map((item) => item.link); //말리와나-동물
-  const filteredLinks12 = dataList.filter((item) => item.id === 8249).map((item) => item.link); //캐치미이프유캔
+  const filteredLinks12 = dataList.filter((item) => item.id === 8249).map((item) => item.link); //나홀로집에1
+  const filteredLinks13 = dataList.filter((item) => item.id === 8647).map((item) => item.link); //퍼펙트게임
 
   const handlePressVideo1 = () => { // 클릭 하였을 때의 네비게이션 이벤트 
     navigation.push('카지노', { id1: filteredLinks }); //@네비게이션이름 수정
@@ -98,7 +100,11 @@ const Sqltest = ({navigation}) => {
   };
 
   const handlePressVideo12 = () => {
-    navigation.push('캐치미이프유캔', { id7: filteredLinks12 });
+    navigation.push('나홀로집에1', { id7: filteredLinks12 });
+  };
+
+  const handlePressVideo13 = () => {
+    navigation.push('퍼펙트게임', { id7: filteredLinks13 });
   };
   
   const renderItem = ({ item }) => ( // 클릭 가능한 이미지 생성
@@ -111,7 +117,7 @@ const Sqltest = ({navigation}) => {
 
   const renderPage = () => ( // 스크롤 표시 @스크롤 갯수 변경 ,영화
     <View style={styles.pageIndicator}> 
-      {[...Array(6)].map((_, i) => (
+      {[...Array(7)].map((_, i) => (
         <View key={i} style={[styles.dot, i === activeIndex && styles.activeDot]} />
       ))}
     </View>
@@ -155,7 +161,8 @@ const Sqltest = ({navigation}) => {
           { id: 7, image: inception, onPress:handlePressVideo7},
           { id: 8, image: nysm, onPress:handlePressVideo8},
           { id: 9, image: race, onPress:handlePressVideo9}, 
-          { id: 12, image: catchme, onPress:handlePressVideo12},
+          { id: 12, image: homealone, onPress:handlePressVideo12},
+          { id: 13, image: perfectgame, onPress:handlePressVideo13},
         ]}
         renderItem={renderItem}
         sliderWidth={600}

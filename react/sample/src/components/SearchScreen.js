@@ -104,7 +104,9 @@ const SearchScreen = ({ route, navigation }) => {
       case 11:
         return '말리와나'            
       case 12:
-        return '캐치미이프유캔'
+        return '나홀로집에1'
+      case 13:
+        return '퍼펙트게임'
     }
   }
 
