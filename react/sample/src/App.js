@@ -43,8 +43,9 @@ function HomeStack({navigation}){
            headerTitleStyle: {//현재화면 소제목 글씨 설정
              fontWeight: 'bold',
              fontSize: 40,
-             color:'#ff0000'
+             color:'#ff0000',
            },
+            headerTitleAlign:'center'
          }}>
            <Stack.Screen name="Main" component={Sqltest} options={{ title:'HanFlix'}}/> 
            <Stack.Screen name="카지노" component={Videotest} options={{title:"카지노", headerTitleStyle: {fontSize:30, fontWeight:'bold', backgroundColor:'#000'}}}/>
@@ -54,7 +55,7 @@ function HomeStack({navigation}){
            <Stack.Screen name="천원짜리변호사" component={Videotest5} options={{title:'천원짜리변호사', headerTitleStyle:{fontSize:30, fontWeight:'bold', backgroundColor:'#000'}}}/>
            <Stack.Screen name="taiwan" component={Videotest6} options={{title:'Taiwan', headerTitleStyle:{fontSize:30, fontWeight:'bold', backgroundColor:'#000'}}}/>
            <Stack.Screen name="인셉션" component={Videotest7} options={{title:'인셉션', headerTitleStyle:{fontSize:30, fontWeight:'bold', backgroundColor:'#000'}}}/>      
-           <Stack.Screen name="나우유씨미" component={Videotest8} options={{title:'니우 유 씨미', headerTitleStyle:{fontSize:30, fontWeight:'bold', backgroundColor:'#000'}}}/>
+           <Stack.Screen name="나우유씨미" component={Videotest8} options={{title:'나우 유 씨미', headerTitleStyle:{fontSize:30, fontWeight:'bold', backgroundColor:'#000'}}}/>
            <Stack.Screen name="분노의질주" component={Videotest9} options={{title:'분노의 질주', headerTitleStyle:{fontSize:30, fontWeight:'bold', backgroundColor:'#000'}}}/>
            <Stack.Screen name="동물의왕국" component={Videotest10} options={{title:'동물의 왕국-개&고양이편', headerTitleStyle:{fontSize:30, fontWeight:'bold', backgroundColor:'#000'}}}/>
            <Stack.Screen name="말리와나" component={Videotest11} options={{title:'말리와 나', headerTitleStyle:{fontSize:30, fontWeight:'bold', backgroundColor:'#000'}}}/>
@@ -79,6 +80,7 @@ function SearchScreen2({navigation}){
            fontSize: 40,
            color:'#fff'
          },
+         headerTitleAlign:'center'
        }}>
          <Stack.Screen name="Search" component={SearchScreen}/>
          <Stack.Screen name="카지노" component={Videotest} options={{title:"카지노", headerTitleStyle: {fontSize:30, fontWeight:'bold', backgroundColor:'#000'}}}/>
@@ -88,7 +90,7 @@ function SearchScreen2({navigation}){
          <Stack.Screen name="천원짜리변호사" component={Videotest5} options={{title:'천원짜리변호사', headerTitleStyle:{fontSize:30, fontWeight:'bold', backgroundColor:'#000'}}}/>
          <Stack.Screen name="taiwan" component={Videotest6} options={{title:'Taiwan', headerTitleStyle:{fontSize:30, fontWeight:'bold', backgroundColor:'#000'}}}/>
          <Stack.Screen name="인셉션" component={Videotest7} options={{title:'인셉션', headerTitleStyle:{fontSize:30, fontWeight:'bold', backgroundColor:'#000'}}}/>
-         <Stack.Screen name="나우유씨미" component={Videotest8} options={{title:'니우 유 씨미', headerTitleStyle:{fontSize:30, fontWeight:'bold', backgroundColor:'#000'}}}/>
+         <Stack.Screen name="나우유씨미" component={Videotest8} options={{title:'나우 유 씨미', headerTitleStyle:{fontSize:30, fontWeight:'bold', backgroundColor:'#000'}}}/>
            <Stack.Screen name="분노의질주" component={Videotest9} options={{title:'분노의 질주', headerTitleStyle:{fontSize:30, fontWeight:'bold', backgroundColor:'#000'}}}/>
            <Stack.Screen name="동물의왕국" component={Videotest10} options={{title:'동물의 왕국-개&고양이편', headerTitleStyle:{fontSize:30, fontWeight:'bold', backgroundColor:'#000'}}}/>
            <Stack.Screen name="말리와나" component={Videotest11} options={{title:'말리와 나', headerTitleStyle:{fontSize:30, fontWeight:'bold', backgroundColor:'#000'}}}/>

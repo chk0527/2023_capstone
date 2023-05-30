@@ -1,15 +1,15 @@
 {
   "expo": {
-    "name": "sample",
+    "name": "Hanflix",
     "slug": "sample",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
+    "icon": "./images/Hlogo.png",
+    "userInterfaceStyle": "dark",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./images/HanFlixlogo.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#000000"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -20,8 +20,8 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "foregroundImage": "./images/Hlogo.png",
+        "backgroundColor": "#000000"
       },
       "package": "com.choihyeonkyu.sample"
     },
