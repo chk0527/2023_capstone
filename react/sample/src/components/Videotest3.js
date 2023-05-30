@@ -16,6 +16,7 @@ const Videotest3 = ({route, navigation}) => { //@1-const명 수정
   const [objects, setObjects] = useState([]); // 전체 리스트 표시를 위한 DB에서 받아온 물체 분류
   const [actions, setActions] = useState([]); // 전체 리스트 표시를 위한 DB에서 받아온 행동 분류
   const [searchOption, setSearchOption] = useState('both');//검색 분류
+  const [sortOrder, setSortOrder] = useState('desc');//정렬 방식
   
 
 
@@ -49,31 +50,50 @@ const Videotest3 = ({route, navigation}) => { //@1-const명 수정
   const [selectedOption, setSelectedOption] = useState(searchOptions.length > 0 ? searchOptions[0].value : "both");
 
   const handleSort = (column) => {
-    let sortedData = [...dataList];
+    let sortedData = [...search]; // 검색된 결과에 대해서 정렬 수행
+  
     if (column === 'id') {
-      sortedData.sort((a, b) => b.id - a.id); // ID 열을 기준으로 역순으로 정렬
+      if (sortOrder === 'desc') {
+        sortedData.sort((a, b) => a.id - b.id); // 검색된 결과를 오름차순으로 정렬
+        setSortOrder('asc');
+      } else {
+        sortedData.sort((a, b) => b.id - a.id); // 검색된 결과를 내림차순으로 정렬
+        setSortOrder('desc');
+      }
     }
-    // 다른 열에 대한 정렬 로직 추가 가능
-
+  
     setSearch(sortedData);
   };
+  
 
   const updateSearch = (text) => {
-    //console.log(searchOption) - 검색 필드 테스트
-    setQuery(text);
-    let filtered = dataList;
-    if (searchOption === 'object') {
-      filtered = dataList.filter((item) => item.object.toLowerCase().includes(text.toLowerCase()));
-    } else if (searchOption === 'action') {
-      filtered = dataList.filter((item) => item.ava_label.toLowerCase().includes(text.toLowerCase()));
-    } else {
-      filtered = dataList.filter((item) =>
-        item.object.toLowerCase().includes(text.toLowerCase()) ||
-        item.ava_label.toLowerCase().includes(text.toLowerCase())
-      );
-    }
-    setSearch(text === '' ? dataList : filtered);
-  };
+  setQuery(text);
+
+  let filtered = dataList;
+  if (searchOption === 'object') {
+    filtered = dataList.filter((item) =>
+      item.object.toLowerCase().includes(text.toLowerCase())
+    );
+  } else if (searchOption === 'action') {
+    filtered = dataList.filter((item) =>
+      item.ava_label.toLowerCase().includes(text.toLowerCase())
+    );
+  } else {
+    filtered = dataList.filter((item) =>
+      item.object.toLowerCase().includes(text.toLowerCase()) ||
+      item.ava_label.toLowerCase().includes(text.toLowerCase())
+    );
+  }
+
+  let sortedData = filtered; // 정렬된 데이터를 검색된 결과에 적용
+  if (sortOrder === 'asc') {
+    sortedData.sort((a, b) => a.id - b.id); // 검색된 결과를 오름차순으로 정렬
+  } else {
+    sortedData.sort((a, b) => b.id - a.id); // 검색된 결과를 내림차순으로 정렬
+  }
+
+  setSearch(text === '' ? dataList : sortedData);
+};
  
   const handleRadioButtonChange = (item, setSelectedOption) => {
     setSelectedOption(item.value);
