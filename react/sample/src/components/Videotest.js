@@ -16,7 +16,7 @@ const Videotest = ({ route, navigation }) => { //@1-const명 수정
   const [objects, setObjects] = useState([]); // 전체 리스트 표시를 위한 DB에서 받아온 물체 분류
   const [actions, setActions] = useState([]); // 전체 리스트 표시를 위한 DB에서 받아온 행동 분류
   const [searchOption, setSearchOption] = useState('both');//검색 분류
-  const [sortOrder, setSortOrder] = useState('desc');//정렬 방식
+  const [sortOrder, setSortOrder] = useState('asc');//정렬 방식
 
 
 
@@ -67,34 +67,33 @@ const Videotest = ({ route, navigation }) => { //@1-const명 수정
   
 
   const updateSearch = (text) => {
-    setQuery(text);
-  
-    let filtered = dataList;
-    if (searchOption === 'object') {
-      filtered = dataList.filter((item) =>
-        item.object.toLowerCase().includes(text.toLowerCase())
-      );
-    } else if (searchOption === 'action') {
-      filtered = dataList.filter((item) =>
-        item.ava_label.toLowerCase().includes(text.toLowerCase())
-      );
-    } else {
-      filtered = dataList.filter((item) =>
-        item.object.toLowerCase().includes(text.toLowerCase()) ||
-        item.ava_label.toLowerCase().includes(text.toLowerCase())
-      );
-    }
-  
-    let sortedData = filtered; // 정렬된 데이터를 검색된 결과에 적용
-    if (sortOrder === 'asc') {
-      sortedData.sort((a, b) => a.id - b.id); // 검색된 결과를 오름차순으로 정렬
-    } else {
-      sortedData.sort((a, b) => b.id - a.id); // 검색된 결과를 내림차순으로 정렬
-    }
-  
-    setSearch(text === '' ? dataList : sortedData);
-  };
-  
+  setQuery(text);
+
+  let filtered = dataList;
+  if (searchOption === 'object') {
+    filtered = dataList.filter((item) =>
+      item.object.toLowerCase().includes(text.toLowerCase())
+    );
+  } else if (searchOption === 'action') {
+    filtered = dataList.filter((item) =>
+      item.ava_label.toLowerCase().includes(text.toLowerCase())
+    );
+  } else {
+    filtered = dataList.filter((item) =>
+      item.object.toLowerCase().includes(text.toLowerCase()) ||
+      item.ava_label.toLowerCase().includes(text.toLowerCase())
+    );
+  }
+
+  let sortedData = filtered; // 정렬된 데이터를 검색된 결과에 적용
+  if (sortOrder === 'asc') {
+    sortedData.sort((a, b) => a.id - b.id); // 검색된 결과를 오름차순으로 정렬
+  } else {
+    sortedData.sort((a, b) => b.id - a.id); // 검색된 결과를 내림차순으로 정렬
+  }
+
+  setSearch(text === '' ? dataList : sortedData);
+};
 
   const handleRadioButtonChange = (item, setSelectedOption) => {
     setSelectedOption(item.value);
