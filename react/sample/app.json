@@ -4,7 +4,7 @@
     "slug": "sample",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./images/Hlogo.png",
+    "icon": "./images/Hlogofore.png",
     "userInterfaceStyle": "dark",
     "splash": {
       "image": "./images/HanFlixlogo.png",
@@ -20,7 +20,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./images/Hlogo.png",
+        "foregroundImage": "./images/Hlogofore.png",
         "backgroundColor": "#000000"
       },
       "package": "com.choihyeonkyu.sample"
