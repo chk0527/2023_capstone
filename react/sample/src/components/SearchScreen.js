@@ -5,7 +5,7 @@ import { Table, TableWrapper, Row, Col, Cell } from "react-native-table-componen
 import { SearchBar } from '@rneui/themed';
 import { RadioButton } from "react-native-paper";
 import { color } from "@rneui/base";
-
+//dddd
 const SearchScreen = ({ route, navigation }) => {
   const [dataList, setDataList] = useState([]);
   const [query, setQuery] = useState('');
