@@ -107,10 +107,6 @@ const SearchScreen = ({ route, navigation }) => {
         return '나홀로집에1'
       case 13:
         return '퍼펙트게임'
-      case 14:
-        return 'saipan'
-      case 15:
-        return 'spain' 
     }
   }
 

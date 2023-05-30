@@ -189,7 +189,7 @@ const Videotest12 = ({route, navigation}) => { //@1-const명 수정
         placeholder="검색할 물체나 행동 입력"
         value={query}
         onChange={(event) => updateSearch(event.nativeEvent.text)}
-      />
+      />     
       <TouchableOpacity
             style={{ 
             backgroundColor: '#657',
