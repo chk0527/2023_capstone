@@ -22,10 +22,11 @@ import homealone from './../../images/homealone.jpeg'
 import perfectgame from './../../images/perfectgame.jpeg'
 import saipan from './../../images/saipan.jpeg'
 import spain from './../../images/spain.jpeg'
+import kings from './../../images/킹스맨.jpeg'
 
 
-const Sqltest = ({navigation}) => {
-  
+const Sqltest = ({ navigation }) => {
+
   const [dataList, setDataList] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0); // @화면 스크롤 위치 표시
   const [activeIndex2, setActiveIndex2] = useState(0);
@@ -60,6 +61,7 @@ const Sqltest = ({navigation}) => {
   const filteredLinks13 = dataList.filter((item) => item.id === 8647).map((item) => item.link); //퍼펙트게임
   const filteredLinks14 = dataList.filter((item) => item.id === 9081).map((item) => item.link); //saipan
   const filteredLinks15 = dataList.filter((item) => item.id === 9346).map((item) => item.link); //spain
+  const filteredLinks16 = dataList.filter((item) => item.id === 9704).map((item) => item.link); //킹스맨
 
   const handlePressVideo1 = () => { // 클릭 하였을 때의 네비게이션 이벤트 
     navigation.push('카지노', { id1: filteredLinks }); //@네비게이션이름 수정
@@ -84,6 +86,7 @@ const Sqltest = ({navigation}) => {
   const handlePressVideo6 = () => {
     navigation.push('taiwan', { id6: filteredLinks6 });
   };
+
   const handlePressVideo7 = () => {
     navigation.push('인셉션', { id7: filteredLinks7 });
   };
@@ -119,7 +122,11 @@ const Sqltest = ({navigation}) => {
   const handlePressVideo15 = () => {
     navigation.push('spain', { id7: filteredLinks15 });
   };
-  
+
+  const handlePressVideo16 = () => {
+    navigation.push('킹스맨', { id7: filteredLinks16 });
+  };
+
   const renderItem = ({ item }) => ( // 클릭 가능한 이미지 생성
     <TouchableWithoutFeedback onPress={item.onPress}>
       <View style={styles.imageContainer}>
@@ -129,8 +136,8 @@ const Sqltest = ({navigation}) => {
   );
 
   const renderPage = () => ( // 스크롤 표시 @스크롤 갯수 변경 ,영화
-    <View style={styles.pageIndicator}> 
-      {[...Array(7)].map((_, i) => (
+    <View style={styles.pageIndicator}>
+      {[...Array(8)].map((_, i) => (
         <View key={i} style={[styles.dot, i === activeIndex && styles.activeDot]} />
       ))}
     </View>
@@ -146,7 +153,7 @@ const Sqltest = ({navigation}) => {
   const renderPage3 = () => (//cctv
     <View style={styles.pageIndicator}>
       {[...Array(2)].map((_, i) => (
-        <View key={i} style={[styles.dot, i === activeIndex3 && styles.activeDot]} /> 
+        <View key={i} style={[styles.dot, i === activeIndex3 && styles.activeDot]} />
       ))}
     </View>
   );
@@ -154,7 +161,7 @@ const Sqltest = ({navigation}) => {
   const renderPage4 = () => (//동물
     <View style={styles.pageIndicator}>
       {[...Array(2)].map((_, i) => (
-        <View key={i} style={[styles.dot, i === activeIndex4 && styles.activeDot]} /> 
+        <View key={i} style={[styles.dot, i === activeIndex4 && styles.activeDot]} />
       ))}
     </View>
   );
@@ -162,97 +169,98 @@ const Sqltest = ({navigation}) => {
 
   return (    //@스크롤 뷰 체크, 엑티브인덱스 수정
     <ScrollView style={styles.top}>
-    <View style={styles.main}>
-    <SafeAreaView 
-      edges={['top']}
-      style={{flex:0,backgroundColor:'white'}}/> 
-      <Text style={styles.fonttest}>Movie</Text>
-      <Carousel // 캐러셀 사용, 스크롤 뷰 구현
-        data={[
-          { id: 1, image: casino, onPress: handlePressVideo1 },
-          { id: 5, image: lawyer, onPress: handlePressVideo5 },
-          { id: 7, image: inception, onPress:handlePressVideo7},
-          { id: 8, image: nysm, onPress:handlePressVideo8},
-          { id: 9, image: race, onPress:handlePressVideo9}, 
-          { id: 12, image: homealone, onPress:handlePressVideo12},
-          { id: 13, image: perfectgame, onPress:handlePressVideo13},
-        ]}
-        renderItem={renderItem}
-        sliderWidth={600}
-        itemWidth={150}
-        
-        loop={true}
+      <View style={styles.main}>
+        <SafeAreaView
+          edges={['top']}
+          style={{ flex: 0, backgroundColor: 'white' }} />
+        <Text style={styles.fonttest}>Movie</Text>
+        <Carousel // 캐러셀 사용, 스크롤 뷰 구현
+          data={[
+            { id: 1, image: casino, onPress: handlePressVideo1 },
+            { id: 5, image: lawyer, onPress: handlePressVideo5 },
+            { id: 7, image: inception, onPress: handlePressVideo7 },
+            { id: 8, image: nysm, onPress: handlePressVideo8 },
+            { id: 9, image: race, onPress: handlePressVideo9 },
+            { id: 12, image: homealone, onPress: handlePressVideo12 },
+            { id: 13, image: perfectgame, onPress: handlePressVideo13 },
+            { id: 16, image: kings, onPress: handlePressVideo16 },
+          ]}
+          renderItem={renderItem}
+          sliderWidth={600}
+          itemWidth={150}
 
-        // autoplay={false}
-        //autoplayDelay={500}
-        //autoplayInterval={2000}
-        gap={16}
-        offset={36}
-        onSnapToItem={(index) => setActiveIndex(index)}
-      />
-      {renderPage()}
-      <Text style={styles.fonttest}>Trip</Text>
-      <Carousel
-        data={[
-          { id: 4, image: japan, onPress: handlePressVideo4 },
-          { id: 6, image: taiwan, onPress: handlePressVideo6 },
-          { id: 14, image: saipan, onPress: handlePressVideo14 },
-          { id: 15, image: spain, onPress: handlePressVideo15 },
-        ]}
-        renderItem={renderItem}
-        sliderWidth={400}
-        itemWidth={200}
-        loop={true}
+          loop={true}
 
-        // autoplay={false}
-        //autoplayDelay={500}
-        //autoplayInterval={2000}
-        gap={16}
-        offset={36}
-        onSnapToItem={(index) => setActiveIndex2(index)}
-      />
-      {renderPage2()}
-      <Text style={styles.fonttest}>Animal</Text>
-      <Carousel
-        data={[
-          { id: 10, image: dogcat, onPress: handlePressVideo10 },
-          { id: 11, image: marley, onPress: handlePressVideo11 }
-        ]}
-        renderItem={renderItem}
-        sliderWidth={400}
-        itemWidth={200}
-        loop={true}
+          // autoplay={false}
+          //autoplayDelay={500}
+          //autoplayInterval={2000}
+          gap={16}
+          offset={36}
+          onSnapToItem={(index) => setActiveIndex(index)}
+        />
+        {renderPage()}
+        <Text style={styles.fonttest}>Trip</Text>
+        <Carousel
+          data={[
+            { id: 4, image: japan, onPress: handlePressVideo4 },
+            { id: 6, image: taiwan, onPress: handlePressVideo6 },
+            { id: 14, image: saipan, onPress: handlePressVideo14 },
+            { id: 15, image: spain, onPress: handlePressVideo15 },
+          ]}
+          renderItem={renderItem}
+          sliderWidth={400}
+          itemWidth={200}
+          loop={true}
 
-        // autoplay={false}
-        //autoplayDelay={500}
-        //autoplayInterval={2000}
-        gap={16}
-        offset={36}
-        onSnapToItem={(index) => setActiveIndex4(index)}
-      />
-      {renderPage4()}
-      <Text style={styles.fonttest}>Accident&Incident</Text>
-      <Carousel
-        data={[
-          { id: 2, image: parking, onPress: handlePressVideo2 },
-          { id: 3, image: cctva, onPress: handlePressVideo3 }
-        ]}
-        renderItem={renderItem}
-        sliderWidth={400}
-        itemWidth={200}
-        loop={true}
+          // autoplay={false}
+          //autoplayDelay={500}
+          //autoplayInterval={2000}
+          gap={16}
+          offset={36}
+          onSnapToItem={(index) => setActiveIndex2(index)}
+        />
+        {renderPage2()}
+        <Text style={styles.fonttest}>Animal</Text>
+        <Carousel
+          data={[
+            { id: 10, image: dogcat, onPress: handlePressVideo10 },
+            { id: 11, image: marley, onPress: handlePressVideo11 }
+          ]}
+          renderItem={renderItem}
+          sliderWidth={400}
+          itemWidth={200}
+          loop={true}
 
-        // autoplay={false}
-        //autoplayDelay={500}
-        //autoplayInterval={2000}
-        gap={16}
-        offset={36}
-        onSnapToItem={(index) => setActiveIndex3(index)}
-      />
-      {renderPage3()}
-    </View>
+          // autoplay={false}
+          //autoplayDelay={500}
+          //autoplayInterval={2000}
+          gap={16}
+          offset={36}
+          onSnapToItem={(index) => setActiveIndex4(index)}
+        />
+        {renderPage4()}
+        <Text style={styles.fonttest}>Accident&Incident</Text>
+        <Carousel
+          data={[
+            { id: 2, image: parking, onPress: handlePressVideo2 },
+            { id: 3, image: cctva, onPress: handlePressVideo3 },
+          ]}
+          renderItem={renderItem}
+          sliderWidth={400}
+          itemWidth={200}
+          loop={true}
+
+          // autoplay={false}
+          //autoplayDelay={500}
+          //autoplayInterval={2000}
+          gap={16}
+          offset={36}
+          onSnapToItem={(index) => setActiveIndex3(index)}
+        />
+        {renderPage3()}
+      </View>
     </ScrollView>
-    
+
   );
 };
 
@@ -263,8 +271,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#000'
   },
-  top:{
-    backgroundColor:'#000'
+  top: {
+    backgroundColor: '#000'
   },
   imageContainer: {
     padding: 10,
@@ -292,14 +300,14 @@ const styles = StyleSheet.create({
   activeDot: {
     backgroundColor: '#0D47A1',
   },
-  fonttest:{
+  fonttest: {
     fontSize: 35,
     color: 'white',
     textAlign: 'left',
     alignSelf: 'flex-start',
   },
-  safe:{
-    backgroundColor:'#000'
+  safe: {
+    backgroundColor: '#000'
   }
 });
 

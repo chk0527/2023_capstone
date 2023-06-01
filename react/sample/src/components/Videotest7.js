@@ -4,20 +4,19 @@ import YoutubePlayer from "react-native-youtube-iframe";
 import axios from 'axios';
 import { Table, TableWrapper, Row, Col } from "react-native-table-component";
 import { SearchBar } from '@rneui/themed';
-import {RadioButton} from "react-native-paper";
+import { RadioButton } from "react-native-paper";
 
 
-const Videotest7 = ({route, navigation}) => { //@1-const명 수정
+const Videotest7 = ({ route, navigation }) => { //@1-const명 수정
   const [playing, setPlaying] = useState(false); // 비디오 재생 
   const [dataList, setDataList] = useState([]); // DB에서 받아온 데이터 리스트
   const [query, setQuery] = useState(''); // 검색창 쿼리문 
   const [search, setSearch] = useState(dataList); // 검색창 입력된 정보
-  //const [modalVisible, setModalVisible] = useState(false);
   const [objects, setObjects] = useState([]); // 전체 리스트 표시를 위한 DB에서 받아온 물체 분류
   const [actions, setActions] = useState([]); // 전체 리스트 표시를 위한 DB에서 받아온 행동 분류
   const [searchOption, setSearchOption] = useState('both');//검색 분류
   const [sortOrder, setSortOrder] = useState('asc');//정렬 방식
-  
+
 
 
   useEffect(() => {
@@ -42,7 +41,7 @@ const Videotest7 = ({route, navigation}) => { //@1-const명 수정
   const [value, setValue] = useState(null);
   const playerRef = useRef();
 
-  const [searchOptions,setSearchOptions] = useState([
+  const [searchOptions, setSearchOptions] = useState([
     { label: ' 물체,행동 검색 ', value: 'both' },
     { label: ' 물체 검색 ', value: 'object' },
     { label: ' 행동 검색 ', value: 'action' },
@@ -51,7 +50,7 @@ const Videotest7 = ({route, navigation}) => { //@1-const명 수정
 
   const handleSort = (column) => {
     let sortedData = [...search]; // 검색된 결과에 대해서 정렬 수행
-  
+
     if (column === 'id') {
       if (sortOrder === 'desc') {
         sortedData.sort((a, b) => a.id - b.id); // 검색된 결과를 오름차순으로 정렬
@@ -61,40 +60,40 @@ const Videotest7 = ({route, navigation}) => { //@1-const명 수정
         setSortOrder('desc');
       }
     }
-  
+
     setSearch(sortedData);
   };
-  
+
 
   const updateSearch = (text) => {
-  setQuery(text);
+    setQuery(text);
 
-  let filtered = dataList;
-  if (searchOption === 'object') {
-    filtered = dataList.filter((item) =>
-      item.object.toLowerCase().includes(text.toLowerCase())
-    );
-  } else if (searchOption === 'action') {
-    filtered = dataList.filter((item) =>
-      item.ava_label.toLowerCase().includes(text.toLowerCase())
-    );
-  } else {
-    filtered = dataList.filter((item) =>
-      item.object.toLowerCase().includes(text.toLowerCase()) ||
-      item.ava_label.toLowerCase().includes(text.toLowerCase())
-    );
-  }
+    let filtered = dataList;
+    if (searchOption === 'object') {
+      filtered = dataList.filter((item) =>
+        item.object.toLowerCase().includes(text.toLowerCase())
+      );
+    } else if (searchOption === 'action') {
+      filtered = dataList.filter((item) =>
+        item.ava_label.toLowerCase().includes(text.toLowerCase())
+      );
+    } else {
+      filtered = dataList.filter((item) =>
+        item.object.toLowerCase().includes(text.toLowerCase()) ||
+        item.ava_label.toLowerCase().includes(text.toLowerCase())
+      );
+    }
 
-  let sortedData = filtered; // 정렬된 데이터를 검색된 결과에 적용
-  if (sortOrder === 'asc') {
-    sortedData.sort((a, b) => a.id - b.id); // 검색된 결과를 오름차순으로 정렬
-  } else {
-    sortedData.sort((a, b) => b.id - a.id); // 검색된 결과를 내림차순으로 정렬
-  }
+    let sortedData = filtered; // 정렬된 데이터를 검색된 결과에 적용
+    if (sortOrder === 'asc') {
+      sortedData.sort((a, b) => a.id - b.id); // 검색된 결과를 오름차순으로 정렬
+    } else {
+      sortedData.sort((a, b) => b.id - a.id); // 검색된 결과를 내림차순으로 정렬
+    }
 
-  setSearch(text === '' ? dataList : sortedData);
-};
- 
+    setSearch(text === '' ? dataList : sortedData);
+  };
+
   const handleRadioButtonChange = (item, setSelectedOption) => {
     setSelectedOption(item.value);
     setSearchOption(item.value);
@@ -110,8 +109,8 @@ const Videotest7 = ({route, navigation}) => { //@1-const명 수정
       );
     }
     setSearch(filtered);
-}
-  
+  }
+
 
   const onStateChange = useCallback((state) => {
     if (state === 'playing') {
@@ -128,26 +127,26 @@ const Videotest7 = ({route, navigation}) => { //@1-const명 수정
 
   const seekTo = useCallback((time) => {
     const [hours, minutes, seconds] = time.split(':').map(Number);
-  const timestamp = seconds+(minutes*60)+(hours*3600)
-  playerRef.current?.seekTo(timestamp, true)
-}, []);
+    const timestamp = seconds + (minutes * 60) + (hours * 3600)
+    playerRef.current?.seekTo(timestamp, true)
+  }, []);
 
-  const flexArr = [0.8,2,1.1,1]; //영역 크기
+  const flexArr = [0.8, 2, 1.1, 1]; //영역 크기
 
-  const renderHeader = () =>(
+  const renderHeader = () => (
     <Row
-    data={['ID', 'Time stamp', 'Object', 'Action']}
-    style={styles.head}
-    textStyle={styles.text}
-    flexArr={flexArr}
-    onPress={() => handleSort('id')} // ID 열 클릭 시 데이터 정렬
-  />
+      data={['ID', 'Time stamp', 'Object', 'Action']}
+      style={styles.head}
+      textStyle={styles.text}
+      flexArr={flexArr}
+      onPress={() => handleSort('id')} // ID 열 클릭 시 데이터 정렬
+    />
   );
 
-  const renderRow = (rowData,index) => (
+  const renderRow = (rowData, index) => (
     <Row
-      data={[rowData.id.toString()-3255, rowData.timestamp, rowData.object.toString(), rowData.ava_label]} //@id순번 빼주기
-      style={styles.cell} 
+      data={[rowData.id.toString() - 3255, rowData.timestamp, rowData.object.toString(), rowData.ava_label]} //@id순번 빼주기
+      style={styles.cell}
       textStyle={styles.text}
       flexArr={flexArr}
       borderColor='white'
@@ -158,13 +157,13 @@ const Videotest7 = ({route, navigation}) => { //@1-const명 수정
     />
   )
 
-  
 
-  const renderObjectItem = ({item}) => (
+
+  const renderObjectItem = ({ item }) => (
     <Text style={styles.item}>{item}</Text>
   );
 
-  const renderActionItem = ({item}) => (
+  const renderActionItem = ({ item }) => (
     <Text style={styles.item}>{item}</Text>
   );
 
@@ -180,7 +179,7 @@ const Videotest7 = ({route, navigation}) => { //@1-const명 수정
 
 
 
-  return (    
+  return (
     <View style={styles.main}>
       <YoutubePlayer
         height={222}
@@ -209,32 +208,32 @@ const Videotest7 = ({route, navigation}) => { //@1-const명 수정
         placeholder="검색할 물체나 행동 입력"
         value={query}
         onChange={(event) => updateSearch(event.nativeEvent.text)}
-      />     
+      />
       <TouchableOpacity
-            style={{ 
-            backgroundColor: '#657',
-            padding: 16,
-            margin: 10,
-            borderRadius: 100,
-            }}
-            
-            onPress={() => {
-            Alert.alert('물체, 행동 전체 리스트', message);
-            }}
-        >
-        <Text style={{textAlign:"center", color: 'white', fontSize: 18, fontWeight:"bold"}}>물체, 행동 전체 리스트</Text>
-        </TouchableOpacity>  
-        <FlatList
-          data={search} // 렌더링할 데이터
-          ListHeaderComponent={renderHeader}
-          renderItem={({item}) => renderRow(item)} // 렌더링할 아이템
-          keyExtractor={(item, index) => index.toString()} // 각 아이템에 대한 고유한 키값을 설정
-          ItemSeparatorComponent={() => (
-            <View style={styles.separator} />
-          )}
-        />
- </View>
-);
+        style={{
+          backgroundColor: '#657',
+          padding: 16,
+          margin: 10,
+          borderRadius: 100,
+        }}
+
+        onPress={() => {
+          Alert.alert('물체, 행동 전체 리스트', message);
+        }}
+      >
+        <Text style={{ textAlign: "center", color: 'white', fontSize: 18, fontWeight: "bold" }}>물체, 행동 전체 리스트</Text>
+      </TouchableOpacity>
+      <FlatList
+        data={search} // 렌더링할 데이터
+        ListHeaderComponent={renderHeader}
+        renderItem={({ item }) => renderRow(item)} // 렌더링할 아이템
+        keyExtractor={(item, index) => index.toString()} // 각 아이템에 대한 고유한 키값을 설정
+        ItemSeparatorComponent={() => (
+          <View style={styles.separator} />
+        )}
+      />
+    </View>
+  );
 
 };
 
@@ -259,24 +258,24 @@ const styles = StyleSheet.create({
   },
   separator: { //flatlist구분선
     height: 1,
-    
+
     backgroundColor: '#ccc',
   },
   radioButtonContainer: {
-    backgroundColor:'#000',
+    backgroundColor: '#000',
     flexDirection: 'row',
     flexWrap: 'wrap',
-    justifyContent: 'center', 
-    alignItems: 'center', 
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   radioButtonItem: {
     flexDirection: 'row',
     alignItems: 'center',
   },
   radioButtonLabel: {
-    color:'#fff',
-    fontWeight:'bold',
-    alignItems:'center'
+    color: '#fff',
+    fontWeight: 'bold',
+    alignItems: 'center'
   },
 });
 

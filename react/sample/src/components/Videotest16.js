@@ -7,7 +7,7 @@ import { SearchBar } from '@rneui/themed';
 import { RadioButton } from "react-native-paper";
 
 
-const Videotest = ({ route, navigation }) => { //@1-const명 수정
+const Videotest16 = ({ route, navigation }) => { //@1-const명 수정
   const [playing, setPlaying] = useState(false); // 비디오 재생 
   const [dataList, setDataList] = useState([]); // DB에서 받아온 데이터 리스트
   const [query, setQuery] = useState(''); // 검색창 쿼리문 
@@ -17,15 +17,13 @@ const Videotest = ({ route, navigation }) => { //@1-const명 수정
   const [searchOption, setSearchOption] = useState('both');//검색 분류
   const [sortOrder, setSortOrder] = useState('asc');//정렬 방식
 
-
-
   useEffect(() => {
     fetchData();
   }, []);
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(`http://3.86.244.172:8080/video1`); //서버get수정 @서버get수정, 서버 쿼리문 수정
+      const response = await axios.get(`http://3.86.244.172:8080/video16`); //서버get수정 @서버get수정, 서버 쿼리문 수정
       setDataList(response.data);
       setSearch(response.data);
       const uniqueObjects = Array.from(new Set(response.data.map(item => item.object)));
@@ -145,7 +143,7 @@ const Videotest = ({ route, navigation }) => { //@1-const명 수정
 
   const renderRow = (rowData, index) => (
     <Row
-      data={[rowData.id.toString(), rowData.timestamp, rowData.object.toString(), rowData.ava_label]} //@id순번 빼주기
+      data={[rowData.id.toString() - 9703, rowData.timestamp, rowData.object.toString(), rowData.ava_label]} //@id순번 빼주기
       style={styles.cell}
       textStyle={styles.text}
       flexArr={flexArr}
@@ -184,7 +182,7 @@ const Videotest = ({ route, navigation }) => { //@1-const명 수정
       <YoutubePlayer
         height={222}
         play={playing}
-        videoId={"Aqkx40ifYWw"} //@id수정
+        videoId={"y23atSmj204"} //@id수정
         onChangeState={onStateChange}
         ref={playerRef}
       />
@@ -265,7 +263,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#000',
     flexDirection: 'row',
     flexWrap: 'wrap',
-    margin: 5,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -281,4 +278,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default Videotest; //@const명 수정
+export default Videotest16; //@const명 수정

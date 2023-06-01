@@ -9,8 +9,8 @@ const Tab = createBottomTabNavigator();
 const Tabs = () => {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="SearchScreen" component={SearchScreen}/>
-      <Tab.Screen name="CategoriesScreen" component={CategoriesScreen}/>
+      <Tab.Screen name="SearchScreen" component={SearchScreen} />
+      <Tab.Screen name="CategoriesScreen" component={CategoriesScreen} />
     </Tab.Navigator>
   );
 }

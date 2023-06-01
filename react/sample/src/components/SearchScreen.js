@@ -61,7 +61,7 @@ const SearchScreen = ({ route, navigation }) => {
     if (searchOption === 'title') {
       filtered = dataList.filter((item) => item.title.toLowerCase().includes(text.toLowerCase()));
     } else if (searchOption === 'object') {
-      filtered =  dataList.filter((item) => item.object.toLowerCase().includes(text.toLowerCase()));
+      filtered = dataList.filter((item) => item.object.toLowerCase().includes(text.toLowerCase()));
     } else {
       filtered = dataList.filter((item) => item.ava_label.toLowerCase().includes(text.toLowerCase()));
     }
@@ -96,13 +96,13 @@ const SearchScreen = ({ route, navigation }) => {
       case 7:
         return '인셉션'
       case 8:
-        return '나우유씨미'          
+        return '나우유씨미'
       case 9:
-        return '분노의질주'          
+        return '분노의질주'
       case 10:
-        return '동물의왕국'              
+        return '동물의왕국'
       case 11:
-        return '말리와나'            
+        return '말리와나'
       case 12:
         return '나홀로집에1'
       case 13:
@@ -110,7 +110,9 @@ const SearchScreen = ({ route, navigation }) => {
       case 14:
         return 'saipan'
       case 15:
-        return 'spain' 
+        return 'spain'
+      case 16:
+        return '킹스맨'
     }
   }
 
@@ -203,8 +205,8 @@ const styles = StyleSheet.create({
     flex: 1,
     borderColor: '#555',
   },
-  flat:{
-    backgroundColor:'#555',
+  flat: {
+    backgroundColor: '#555',
   },
   cell_id: {
     flex: 0.5,
@@ -235,8 +237,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     margin: 5,
-    justifyContent: 'center', 
-    alignItems: 'center', 
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   radioButtonItem: {
     flexDirection: 'row',
@@ -244,7 +246,7 @@ const styles = StyleSheet.create({
   },
   radioButtonLabel: {
     color: '#fff',
-    fontWeight:'bold',
+    fontWeight: 'bold',
     alignItems: 'center'
   },
   separator: { //flatlist구분선

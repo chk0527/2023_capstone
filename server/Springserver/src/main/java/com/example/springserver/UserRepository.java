@@ -22,45 +22,48 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     List<User> findAllData();
 
     @Query("SELECT u from User u where u.link = 'Aqkx40ifYWw' ")
-    List<User> findVideo1();
+    List<User> findVideo1(); //카지노
 
     @Query("SELECT u from User u where u.link = 'n1gzZhV2pVc' ")
-    List<User> findVideo2();
+    List<User> findVideo2(); //주차장 cctv
 
     @Query("SELECT u from User u where u.link = 'KPjm471GmHA' ")
-    List<User> findVideo3();
+    List<User> findVideo3(); //cctv
 
     @Query("SELECT u from User u where u.link = 'BhejYMbF1TU' ")
-    List<User> findVideo4();
+    List<User> findVideo4(); //japan
 
     @Query("SELECT u from User u where u.link = 'yyiox2536C0' ")
-    List<User> findVideo5();
+    List<User> findVideo5(); //lawyer
 
     @Query("SELECT u from User u where u.link = 'AZsFteT_nGI' ")
-    List<User> findVideo6();
+    List<User> findVideo6(); //tai
 
     @Query("SELECT u from User u where u.link = 'fROwlX7tW_A' ")
-    List<User> findVideo7();
+    List<User> findVideo7(); //inception
 
     @Query("SELECT u from User u where u.link = 'y1Dz7-bN8x8' ")
-    List<User> findVideo8();
+    List<User> findVideo8(); //나우유시미
 
     @Query("SELECT u from User u where u.link = 'fg2qbpVMSaw' ")
-    List<User> findVideo9();
+    List<User> findVideo9(); //분노의질주
 
     @Query("SELECT u from User u where u.link = 'HN98oskqxos' ")
-    List<User> findVideo10();
+    List<User> findVideo10(); //동물의왕국
 
     @Query("SELECT u from User u where u.link = 'z-j6390UGaw' ")
-    List<User> findVideo11();
+    List<User> findVideo11(); //말리와나
 
     @Query("SELECT u from User u where u.link = '5kKMnDiG6Kc' ")
-    List<User> findVideo12();
+    List<User> findVideo12(); //나홀로집에
 
     @Query("SELECT u from User u where u.link = '41sQmLL8qRY' ")
-    List<User> findVideo13();
+    List<User> findVideo13(); //퍼펙트게임
     @Query("SELECT u from User u where u.link = 'Khsg9MbesSU' ")
-    List<User> findVideo14();
+    List<User> findVideo14(); //saipan
     @Query("SELECT u from User u where u.link = 'u2jiZIuTNAc' ")
-    List<User> findVideo15();
+    List<User> findVideo15(); //spain
+
+    @Query("SELECT u from User u where u.link = 'y23atSmj204' ")
+    List<User> findVideo16(); //킹스맨
 }
