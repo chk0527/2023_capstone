@@ -83,8 +83,6 @@ const SearchScreen = ({ route, navigation }) => {
     switch (id) {
       case 1:
         return '카지노'
-      case 2:
-        return '주차장cctv'
       case 3:
         return 'cctv'
       case 4:
@@ -112,6 +110,8 @@ const SearchScreen = ({ route, navigation }) => {
       case 15:
         return 'spain'
       case 16:
+        return '주차장cctv'
+      case 19:
         return '킹스맨'
     }
   }
