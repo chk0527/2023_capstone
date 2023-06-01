@@ -82,7 +82,7 @@ function SearchScreen2({navigation}){
          },
          headerTitleAlign:'center'
        }}>
-         <Stack.Screen name="Search" component={SearchScreen}/>
+         <Stack.Screen name="Search2" component={SearchScreen} options={{title:"Search"}}/>
          <Stack.Screen name="카지노" component={Videotest} options={{title:"카지노", headerTitleStyle: {fontSize:30, fontWeight:'bold', backgroundColor:'#000'}}}/>
          <Stack.Screen name="주차장cctv" component={Videotest2} options={{title:"주차장 cctv", headerTitleStyle: {fontSize:30, fontWeight:'bold', backgroundColor:'#000'}}}/>
          <Stack.Screen name="cctv" component={Videotest3} options={{title:'그것이 알고싶다 cctv', headerTitleStyle:{fontSize:30, fontWeight:'bold', backgroundColor:'#000'}}}/>
