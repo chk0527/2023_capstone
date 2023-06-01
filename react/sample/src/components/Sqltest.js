@@ -12,7 +12,8 @@ import cctva from './../../images/cctv.jpeg'
 import inception from './../../images/inception.jpeg'
 import japan from './../../images/japan.jpeg'
 import taiwan from './../../images/taiwan.jpeg'
-import austria from './../../images/austria.jpeg'
+import parking from './../../images/주차장.png'
+
 import nysm from './../../images/nysm.jpeg'
 import race from './../../images/race.jpeg'
 import marley from './../../images/marley.jpeg'
@@ -233,7 +234,7 @@ const Sqltest = ({navigation}) => {
       <Text style={styles.fonttest}>Accident&Incident</Text>
       <Carousel
         data={[
-          { id: 2, image: austria, onPress: handlePressVideo2 },
+          { id: 2, image: parking, onPress: handlePressVideo2 },
           { id: 3, image: cctva, onPress: handlePressVideo3 }
         ]}
         renderItem={renderItem}
