@@ -145,7 +145,7 @@ const Videotest2 = ({route, navigation}) => { //@1-const명 수정
 
   const renderRow = (rowData,index) => (
     <Row
-      data={[rowData.id.toString()-540, rowData.timestamp, rowData.object.toString(), rowData.ava_label]} //@id순번 빼주기
+      data={[rowData.id.toString()-9449, rowData.timestamp, rowData.object.toString(), rowData.ava_label]} //@id순번 빼주기
       style={styles.cell} 
       textStyle={styles.text}
       flexArr={flexArr}
@@ -184,7 +184,7 @@ const Videotest2 = ({route, navigation}) => { //@1-const명 수정
       <YoutubePlayer
         height={222}
         play={playing}
-        videoId={"gcgwwFPqrSA"} //@id수정
+        videoId={"n1gzZhV2pVc"} //@id수정
         onChangeState={onStateChange}
         ref={playerRef}
       />

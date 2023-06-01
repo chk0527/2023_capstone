@@ -49,7 +49,7 @@ function HomeStack({navigation}){
          }}>
            <Stack.Screen name="Main" component={Sqltest} options={{ title:'HanFlix'}}/> 
            <Stack.Screen name="카지노" component={Videotest} options={{title:"카지노", headerTitleStyle: {fontSize:30, fontWeight:'bold', backgroundColor:'#000'}}}/>
-           <Stack.Screen name="austria" component={Videotest2} options={{title:"Austria", headerTitleStyle: {fontSize:30, fontWeight:'bold', backgroundColor:'#000'}}}/>
+           <Stack.Screen name="주차장cctv" component={Videotest2} options={{title:"주차장 cctv", headerTitleStyle: {fontSize:30, fontWeight:'bold', backgroundColor:'#000'}}}/>
            <Stack.Screen name="cctv" component={Videotest3} options={{title:'그것이 알고싶다 cctv', headerTitleStyle:{fontSize:30, fontWeight:'bold', backgroundColor:'#000'}}}/>
            <Stack.Screen name="japan" component={Videotest4} options={{title:'Japan', headerTitleStyle:{fontSize:30, fontWeight:'bold', backgroundColor:'#000'}}}/>
            <Stack.Screen name="천원짜리변호사" component={Videotest5} options={{title:'천원짜리변호사', headerTitleStyle:{fontSize:30, fontWeight:'bold', backgroundColor:'#000'}}}/>
@@ -84,7 +84,7 @@ function SearchScreen2({navigation}){
        }}>
          <Stack.Screen name="Search" component={SearchScreen}/>
          <Stack.Screen name="카지노" component={Videotest} options={{title:"카지노", headerTitleStyle: {fontSize:30, fontWeight:'bold', backgroundColor:'#000'}}}/>
-         <Stack.Screen name="austria" component={Videotest2} options={{title:"Austria", headerTitleStyle: {fontSize:30, fontWeight:'bold', backgroundColor:'#000'}}}/>
+         <Stack.Screen name="주차장cctv" component={Videotest2} options={{title:"주차장 cctv", headerTitleStyle: {fontSize:30, fontWeight:'bold', backgroundColor:'#000'}}}/>
          <Stack.Screen name="cctv" component={Videotest3} options={{title:'그것이 알고싶다 cctv', headerTitleStyle:{fontSize:30, fontWeight:'bold', backgroundColor:'#000'}}}/>
          <Stack.Screen name="japan" component={Videotest4} options={{title:'Japan', headerTitleStyle:{fontSize:30, fontWeight:'bold', backgroundColor:'#000'}}}/>
          <Stack.Screen name="천원짜리변호사" component={Videotest5} options={{title:'천원짜리변호사', headerTitleStyle:{fontSize:30, fontWeight:'bold', backgroundColor:'#000'}}}/>

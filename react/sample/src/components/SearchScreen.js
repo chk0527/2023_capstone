@@ -84,7 +84,7 @@ const SearchScreen = ({ route, navigation }) => {
       case 1:
         return '카지노'
       case 2:
-        return 'austria'
+        return '주차장cctv'
       case 3:
         return 'cctv'
       case 4:

@@ -45,7 +45,7 @@ const Sqltest = ({navigation}) => {
   };
 
   const filteredLinks = dataList.filter((item) => item.id === 1).map((item) => item.link); // DB에 있는 데이터 중 각 영상의 1번 행을 가져옴 @id수정 //카지노
-  const filteredLinks2 = dataList.filter((item) => item.id === 541).map((item) => item.link); //austria
+  const filteredLinks2 = dataList.filter((item) => item.id === 9450).map((item) => item.link); //주차장cctv
   const filteredLinks3 = dataList.filter((item) => item.id === 785).map((item) => item.link); //cctv
   const filteredLinks4 = dataList.filter((item) => item.id === 1326).map((item) => item.link); //japan
   const filteredLinks5 = dataList.filter((item) => item.id === 1481).map((item) => item.link); //lawyer
@@ -65,7 +65,7 @@ const Sqltest = ({navigation}) => {
   };
 
   const handlePressVideo2 = () => {
-    navigation.push('austria', { id2: filteredLinks2 });
+    navigation.push('주차장cctv', { id2: filteredLinks2 });
   };
 
   const handlePressVideo3 = () => {
@@ -136,7 +136,7 @@ const Sqltest = ({navigation}) => {
   );
   const renderPage2 = () => (//여행지
     <View style={styles.pageIndicator}>
-      {[...Array(5)].map((_, i) => (
+      {[...Array(4)].map((_, i) => (
         <View key={i} style={[styles.dot, i === activeIndex2 && styles.activeDot]} />
       ))}
     </View>
@@ -144,7 +144,7 @@ const Sqltest = ({navigation}) => {
 
   const renderPage3 = () => (//cctv
     <View style={styles.pageIndicator}>
-      {[...Array(1)].map((_, i) => (
+      {[...Array(2)].map((_, i) => (
         <View key={i} style={[styles.dot, i === activeIndex3 && styles.activeDot]} /> 
       ))}
     </View>
@@ -193,7 +193,6 @@ const Sqltest = ({navigation}) => {
       <Text style={styles.fonttest}>Trip</Text>
       <Carousel
         data={[
-          { id: 2, image: austria, onPress: handlePressVideo2 },
           { id: 4, image: japan, onPress: handlePressVideo4 },
           { id: 6, image: taiwan, onPress: handlePressVideo6 },
           { id: 14, image: saipan, onPress: handlePressVideo14 },
@@ -234,6 +233,7 @@ const Sqltest = ({navigation}) => {
       <Text style={styles.fonttest}>Accident&Incident</Text>
       <Carousel
         data={[
+          { id: 2, image: austria, onPress: handlePressVideo2 },
           { id: 3, image: cctva, onPress: handlePressVideo3 }
         ]}
         renderItem={renderItem}
