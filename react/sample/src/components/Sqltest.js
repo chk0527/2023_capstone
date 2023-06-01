@@ -12,7 +12,7 @@ import cctva from './../../images/cctv.jpeg'
 import inception from './../../images/inception.jpeg'
 import japan from './../../images/japan.jpeg'
 import taiwan from './../../images/taiwan.jpeg'
-import parking from './../../images/주차장.png'
+import parking from './../../images/parking.jpeg'
 
 import nysm from './../../images/nysm.jpeg'
 import race from './../../images/race.jpeg'
@@ -22,7 +22,7 @@ import homealone from './../../images/homealone.jpeg'
 import perfectgame from './../../images/perfectgame.jpeg'
 import saipan from './../../images/saipan.jpeg'
 import spain from './../../images/spain.jpeg'
-import kings from './../../images/킹스맨.jpeg'
+import kings from './../../images/kings.jpeg'
 
 
 const Sqltest = ({ navigation }) => {
